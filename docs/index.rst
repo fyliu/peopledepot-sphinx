@@ -24,10 +24,11 @@ Welcome to PeopleDepot's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Developer guides:
+   :caption: Contributing:
 
    CONTRIBUTING
    how-to/add-model-and-api-endpoints
+   decisions/index
    tools/index
 
 .. todolist::
