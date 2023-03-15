@@ -1,4 +1,4 @@
-# How to setup python for development
+# Python
 
 ## Install python
 
