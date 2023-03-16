@@ -233,3 +233,15 @@ class Location(AbstractBaseModel):
 
     def __str__(self):
         return f"{self.name}"
+
+
+class UserStatus(AbstractBaseModel):
+    """
+    User status in the organization context
+    """
+
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name

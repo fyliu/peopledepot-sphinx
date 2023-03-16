@@ -32,3 +32,15 @@ def test_faq_viewed(faq_viewed):
 
 def test_location(location):
     assert str(location) == "Test Hack for L.A. HQ"
+
+
+def test_create_user_status():
+    from ..models import UserStatus
+
+    payload = {
+        "name": "test user status",
+    }
+    user_status = UserStatus(**payload)
+
+    assert user_status.name == payload["name"]
+    assert str(user_status) == payload["name"]
