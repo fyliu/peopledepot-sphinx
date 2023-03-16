@@ -72,7 +72,9 @@ class User(PermissionsMixin, AbstractBaseUser, AbstractBaseModel):
     gmail = models.EmailField(blank=True)
     preferred_email = models.EmailField(blank=True)
 
-    # user_status = models.ForeignKey(user_status_type, on_delete=models.PROTECT)
+    status = models.ForeignKey(
+        "UserStatus", on_delete=models.RESTRICT, null=True, related_name="users"
+    )
     # current_practice_area = models.ManyToManyField("PracticeArea")
     # target_practice_area = models.ManyToManyField("PracticeArea")
 
@@ -236,8 +238,10 @@ class Location(AbstractBaseModel):
 
 
 class UserStatus(AbstractBaseModel):
-    """
-    User status in the organization context
+    """User status in the organization context
+
+    Each user has a single status. Each status can be associated with a number
+    of users that has that status.
     """
 
     name = models.CharField(max_length=255)

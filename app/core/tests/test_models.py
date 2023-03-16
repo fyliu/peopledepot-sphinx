@@ -1,4 +1,5 @@
 import pytest
+from django.db.models.deletion import RestrictedError
 
 pytestmark = pytest.mark.django_db
 
@@ -34,7 +35,7 @@ def test_location(location):
     assert str(location) == "Test Hack for L.A. HQ"
 
 
-def test_create_user_status():
+def test_create_user_status(user):
     from ..models import UserStatus
 
     payload = {
@@ -42,5 +43,27 @@ def test_create_user_status():
     }
     user_status = UserStatus(**payload)
 
-    assert user_status.name == payload["name"]
     assert str(user_status) == payload["name"]
+
+
+def test_assign_user_status_to_user(user, user_status):
+    user_status.save()
+
+    assert user_status.users.count() == 0
+
+    user.status = user_status
+    user.save()
+
+    assert str(user.status) == user_status.name
+    assert user_status.users.count() == 1
+
+
+def test_delete_user_status(user, user_status):
+    user_status.save()
+
+    user.status = user_status
+    user.save()
+
+    # delete is protected and raises an exception
+    with pytest.raises(RestrictedError):
+        user_status.delete()
