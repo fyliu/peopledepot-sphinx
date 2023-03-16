@@ -243,5 +243,8 @@ class UserStatus(AbstractBaseModel):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
 
+    class Meta:
+        verbose_name_plural = "User statuses"
+
     def __str__(self):
         return self.name

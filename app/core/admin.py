@@ -12,6 +12,7 @@ from .models import Project
 from .models import RecurringEvent
 from .models import SponsorPartner
 from .models import User
+from .models import UserStatus
 
 
 class UserCreationForm(DefaultUserCreationForm):
@@ -135,7 +136,7 @@ class SponsorPartnerAdmin(admin.ModelAdmin):
 
 
 @admin.register(Faq)
-class Faq(admin.ModelAdmin):
+class FaqAdmin(admin.ModelAdmin):
     list_display = (
         "question",
         "answer",
@@ -144,12 +145,12 @@ class Faq(admin.ModelAdmin):
 
 
 @admin.register(FaqViewed)
-class FaqViewed(admin.ModelAdmin):
+class FaqViewedAdmin(admin.ModelAdmin):
     list_display = ("faq",)
 
 
 @admin.register(Location)
-class Location(admin.ModelAdmin):
+class LocationAdmin(admin.ModelAdmin):
     list_display = (
         "name",
         "address_line_1",
@@ -158,4 +159,12 @@ class Location(admin.ModelAdmin):
         "state",
         "zipcode",
         "phone",
+    )
+
+
+@admin.register(UserStatus)
+class UserStatusAdmin(admin.ModelAdmin):
+    list_display = (
+        "name",
+        "description",
     )
