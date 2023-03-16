@@ -8,6 +8,7 @@ from .views import ProjectViewSet
 from .views import RecurringEventViewSet
 from .views import SponsorPartnerViewSet
 from .views import UserProfileAPIView
+from .views import UserStatusViewSet
 from .views import UserViewSet
 
 router = routers.SimpleRouter()
@@ -18,6 +19,7 @@ router.register(r"sponsor-partners", SponsorPartnerViewSet, basename="sponsor-pa
 router.register(r"faqs", FaqViewSet, basename="faq")
 router.register(r"faqs-viewed", FaqViewedViewSet, basename="faq-viewed")
 router.register(r"locations", LocationViewSet, basename="location")
+router.register(r"user-statuses", UserStatusViewSet, basename="user-status")
 
 urlpatterns = [
     path("me/", UserProfileAPIView.as_view(), name="my_profile"),

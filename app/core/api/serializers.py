@@ -8,6 +8,7 @@ from core.models import Project
 from core.models import RecurringEvent
 from core.models import SponsorPartner
 from core.models import User
+from core.models import UserStatus
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -176,3 +177,20 @@ class LocationSerializer(serializers.ModelSerializer):
 
 
 LocationSerializer._declared_fields["zip"] = serializers.CharField(source="zipcode")
+
+
+class UserStatusSerializer(serializers.ModelSerializer):
+    """Used to retieve user status"""
+
+    class Meta:
+        model = UserStatus
+        fields = (
+            "uuid",
+            "name",
+            "description",
+        )
+        read_only_fields = (
+            "uuid",
+            "created_at",
+            "updated_at",
+        )

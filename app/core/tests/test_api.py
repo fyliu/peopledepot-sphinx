@@ -208,3 +208,41 @@ def test_create_location(auth_client):
     }
     res = auth_client.post(LOCATION_URL, payload)
     assert res.status_code == status.HTTP_201_CREATED
+
+
+def test_create_user_status(auth_client):
+    """Test that we can create a user status"""
+
+    payload = {
+        "name": "Test Active",
+    }
+    response = auth_client.post(reverse("user-status-list"), payload)
+    assert response.status_code == status.HTTP_201_CREATED
+
+
+def test_create_user_with_status(auth_client, user_status):
+    """Test that we can create a user with a status"""
+
+    payload = dict(
+        CREATE_USER_PAYLOAD,
+        **{
+            "status": user_status.uuid,
+        },
+    )
+    response = auth_client.post(USERS_URL, payload)
+    assert response.status_code == status.HTTP_201_CREATED
+
+
+def test_create_user_and_assign_status(auth_client, user_status, request):
+    """Test that we can create a user and assign it a status"""
+
+    payload = {
+        "status": user_status.uuid,
+    }
+
+    response = auth_client.post(USERS_URL, CREATE_USER_PAYLOAD)
+    assert response.status_code == status.HTTP_201_CREATED
+
+    url = request.getfixturevalue("user_url")
+    response = auth_client.patch(url, payload)
+    assert response.status_code == status.HTTP_200_OK

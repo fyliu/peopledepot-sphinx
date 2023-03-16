@@ -16,6 +16,7 @@ from ..models import Location
 from ..models import Project
 from ..models import RecurringEvent
 from ..models import SponsorPartner
+from ..models import UserStatus
 from .serializers import FaqSerializer
 from .serializers import FaqViewedSerializer
 from .serializers import LocationSerializer
@@ -23,6 +24,7 @@ from .serializers import ProjectSerializer
 from .serializers import RecurringEventSerializer
 from .serializers import SponsorPartnerSerializer
 from .serializers import UserSerializer
+from .serializers import UserStatusSerializer
 
 
 class UserProfileAPIView(RetrieveModelMixin, GenericAPIView):
@@ -199,3 +201,17 @@ class LocationViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = Location.objects.all()
     serializer_class = LocationSerializer
+
+
+@extend_schema_view(
+    list=extend_schema(description="Return a list of all user statuses"),
+    create=extend_schema(description="Create a new user status"),
+    retrieve=extend_schema(description="Return the details of a user status"),
+    destroy=extend_schema(description="Delete a user status"),
+    update=extend_schema(description="Update a user status"),
+    partial_update=extend_schema(description="Patch a user status"),
+)
+class UserStatusViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    queryset = UserStatus.objects.all()
+    serializer_class = UserStatusSerializer
