@@ -53,13 +53,21 @@ repos:
     hooks:
       - id: black
         language_version: python3.10
-        exclude: ^app/core/migrations/
+        exclude: |
+          (?x)(
+            ^app/core/migrations/|
+            ^app/core/scripts/.*_seed.py
+          )
 
   - repo: https://github.com/pycqa/flake8
     rev: 6.0.0
     hooks:
       - id: flake8
-        exclude: ^app/core/migrations/
+        exclude: |
+          (?x)(
+            ^app/core/migrations/|
+            ^app/core/scripts/.*_seed.py
+          )
         args: [--max-line-length=119, --max-complexity=4, --pytest-fixture-no-parentheses]
         additional_dependencies:
           [
