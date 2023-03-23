@@ -28,13 +28,7 @@ Welcome to PeopleDepot's documentation!
 
    CONTRIBUTING
    how-to/add-model-and-api-endpoints
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Tools:
-
-   tools/sphinx
-   tools/scripts
+   tools/index
 
 .. todolist::
 
