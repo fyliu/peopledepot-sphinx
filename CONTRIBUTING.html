@@ -1,0 +1,797 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Add new model and API endpoints" href="how-to/add-model-and-api-endpoints.html" /><link rel="prev" title="Misc Notes" href="architecture/Notes.html" />
+
+    <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
+        <title>Contributing to People Depot - People Depot</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">People Depot</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">People Depot</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Get started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="readme.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Architecture:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="architecture/authentication.html">Cognito authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture/Notes.html">Misc Notes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer guides:</span></p>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#"><span class="sectnum"> </span>Contributing to People Depot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="how-to/add-model-and-api-endpoints.html"><span class="sectnum"> </span>Add new model and API endpoints</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tools:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tools/sphinx.html">Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/scripts.html">Convenience Scripts</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/hackforla/peopledepot/edit/main/docs/CONTRIBUTING.md" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="contributing-to-people-depot">
+<h1><span class="sectnum"> </span>Contributing to People Depot<a class="headerlink" href="#contributing-to-people-depot" title="Permalink to this heading">#</a></h1>
+<p>Thank you for volunteering your time! The following is a set of guidelines for contributing to the peopledepot repository, which is hosted on GitHub.</p>
+<p><strong>Please make sure you have completed the onboarding process which includes joining the Hack for LA Slack, GitHub, and Google Drive. If you have not been onboarded, see the <a class="reference external" href="https://www.hackforla.org/getting-started">Getting Started Page</a>.</strong> <em>Workshop attendees are granted a temporary exception from this requirement.</em></p>
+<section id="joining-repository-team">
+<h2><span class="sectnum">1. </span>Joining Repository Team<a class="headerlink" href="#joining-repository-team" title="Permalink to this heading">#</a></h2>
+<p>This step is optional if this is your first time fixing an issue and you want to try fixing an issue without this step.</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">people-depot</span></code> Slack channel, send an introductory message with your GitHub handle/username asking to be added to the PeopleDepot GitHub repository, and google email to be added to the Google Docs Drive.</p>
+<p><strong>NOTE:</strong> Once you have accepted the GitHub invite (comes via email or in your GitHub notifications), <strong>please do the following</strong>:</p>
+<p>Make your own Hack for LA GitHub organization membership public by following this <a class="reference external" href="https://help.github.com/en/articles/publicizing-or-hiding-organization-membership#changing-the-visibility-of-your-organization-membership">guide</a>.</p>
+</section>
+<section id="setting-up-development-environment">
+<h2><span class="sectnum">2. </span>Setting Up Development Environment<a class="headerlink" href="#setting-up-development-environment" title="Permalink to this heading">#</a></h2>
+<section id="pre-requisites">
+<h3><span class="sectnum">2.1. </span>Pre-requisites<a class="headerlink" href="#pre-requisites" title="Permalink to this heading">#</a></h3>
+<section id="github-account">
+<h4><span class="sectnum">2.1.1. </span>GitHub account<a class="headerlink" href="#github-account" title="Permalink to this heading">#</a></h4>
+<p>See <a class="reference external" href="https://docs.github.com/en/get-started/signing-up-for-github/signing-up-for-a-new-github-account#signing-up-for-a-new-account">here</a> for creating a GitHub account. If you are not familiar with Git, <a class="reference external" href="https://docs.github.com/en/get-started/quickstart/hello-world">this tutorial</a> is recommended.</p>
+</section>
+<section id="two-factor-authentication">
+<h4><span class="sectnum">2.1.2. </span>Two-factor authentication<a class="headerlink" href="#two-factor-authentication" title="Permalink to this heading">#</a></h4>
+<p>Set up two-factor authentication on your account by following this <a class="reference external" href="https://docs.github.com/en/github/authenticating-to-github/configuring-two-factor-authentication">guide</a>.</p>
+</section>
+<section id="text-editor">
+<h4><span class="sectnum">2.1.3. </span>Text editor<a class="headerlink" href="#text-editor" title="Permalink to this heading">#</a></h4>
+<p><a class="reference external" href="https://code.visualstudio.com/download">VS Code</a> is recommended, but feel free to use a text editor of your choice.</p>
+</section>
+<section id="install-git">
+<h4><span class="sectnum">2.1.4. </span>Install Git<a class="headerlink" href="#install-git" title="Permalink to this heading">#</a></h4>
+<p>Before cloning your forked repository to your local machine, you must have Git installed. You can find instructions for installing Git for your operating system <a class="reference external" href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git"><strong>here</strong></a>.</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-0">
+Windows</label><div class="sd-tab-content docutils">
+<p>For Windows, you may want to <a class="reference external" href="https://code.visualstudio.com/docs/remote/wsl">install a Windows Subsystem for Linux (WSL)</a> and then install Git from WSL.</p>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-1">
+Mac</label><div class="sd-tab-content docutils">
+<p>Please note that if you have a Mac, the page offers several options (see other option, if you need to conserve hard drive space) including:</p>
+<ul class="simple">
+<li><p>an “easiest” option (this version is fine for use at hackforla): This option would take just over 4GB.</p></li>
+<li><p>a “more up to date” option (not required but optional if you want it): This option prompts you to go to install an 8GB package manager called Homebrew.</p></li>
+<li><p>Other option: If your computer is low on space, you can use this <a class="reference external" href="https://www.datacamp.com/community/tutorials/homebrew-install-use">tutorial</a> to install XCode Command Tools and a lighter version of Homebrew and then install Git using this command: <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">brew</span> <span class="pre">install</span> <span class="pre">git</span></code> which in total uses only 300MB.</p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="install-docker">
+<h4><span class="sectnum">2.1.5. </span>Install Docker<a class="headerlink" href="#install-docker" title="Permalink to this heading">#</a></h4>
+<p>Install or make sure <a class="reference external" href="https://docs.docker.com/get-docker/">docker</a> and <a class="reference external" href="https://docs.docker.com/compose/install/">docker-compose</a> are installed on your computer</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">    </span>docker<span class="w"> </span>-v
+<span class="w">    </span>docker-compose<span class="w"> </span>-v
+</pre></div>
+</div>
+<p>The recommended installation method for your operating system can be found <a class="reference external" href="https://docs.docker.com/install/">here</a>. <em><strong>Feel free to reach out in the <a class="reference external" href="https://hackforla.slack.com/messages/people-depot/">Hack for LA Slack channel</a> if you have trouble installing docker on your system</strong></em></p>
+<p>More on using Docker and the concepts of containerization:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.docker.com/get-started/">Get started with Docker</a></p></li>
+</ul>
+</section>
+</section>
+<section id="fork-the-repository">
+<h3><span class="sectnum">2.2. </span>Fork the repository<a class="headerlink" href="#fork-the-repository" title="Permalink to this heading">#</a></h3>
+<p>You can fork the hackforla/peopledepot repository by clicking <a href="https://github.com/hackforla/peopledepot/fork"> <button> <img src="https://user-images.githubusercontent.com/17777237/54873012-40fa5b00-4dd6-11e9-98e0-cc436426c720.png" width="8px"> Fork</button></a>. A fork is a copy of the repository that will be placed on your GitHub account.</p>
+<p><strong>Note:</strong> It should create a URL that looks like the following -&gt; <code class="docutils literal notranslate"><span class="pre">https://github.com/&lt;your_GitHub_user_name&gt;/peopledepot</span></code>.</p>
+<p><strong>For example</strong> -&gt; <code class="docutils literal notranslate"><span class="pre">https://github.com/octocat/peopledepot</span></code>.</p>
+<p><strong>Be Aware:</strong> What you have created is a forked copy in a remote version on GitHub. It is not yet on your local machine yet.</p>
+<section id="clone-a-copy-on-your-computer">
+<h4><span class="sectnum">2.2.1. </span>Clone a copy on your computer<a class="headerlink" href="#clone-a-copy-on-your-computer" title="Permalink to this heading">#</a></h4>
+<p>The following steps will clone (create) a local copy of the forked repository on your computer.</p>
+<ol class="arabic simple">
+<li><p>Create a new folder in your computer that will contain <code class="docutils literal notranslate"><span class="pre">hackforla</span></code> projects.</p></li>
+</ol>
+<p>In your command line interface (Terminal, Git Bash, Powershell), move to where you want your new folder to be placed and create a new folder in your computer that will contain <code class="docutils literal notranslate"><span class="pre">hackforla</span></code> projects. After that, navigate into the folder(directory) you just created.</p>
+<p>For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/projects
+mkdir<span class="w"> </span>hackforla
+<span class="nb">cd</span><span class="w"> </span>hackforla
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>From the hackforla directory created in previous section:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/&lt;your_GitHub_user_name&gt;/peopledepot.git
+</pre></div>
+</div>
+<p>For example if your GitHub username was <code class="docutils literal notranslate"><span class="pre">octocat</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/octocat/peopledepot.git
+</pre></div>
+</div>
+<p>**Note: You can also clone using ssh which is more secure but requires more setup. Because of the additional setup, cloning using https as shown above is recommended.</p>
+<p>You should now have a new folder in your <code class="docutils literal notranslate"><span class="pre">hackforla</span></code> folder called <code class="docutils literal notranslate"><span class="pre">peopledepot</span></code>. Verify this by changing into the new directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>peopledepot
+</pre></div>
+</div>
+</section>
+<section id="verify-and-set-up-remote-references">
+<h4><span class="sectnum">2.2.2. </span>Verify and set up remote references<a class="headerlink" href="#verify-and-set-up-remote-references" title="Permalink to this heading">#</a></h4>
+<p>Verify that your local cloned repository is pointing to the correct <code class="docutils literal notranslate"><span class="pre">origin</span></code> URL (that is, the forked repo on your own GitHub account):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>remote<span class="w"> </span>-v
+</pre></div>
+</div>
+<p>You should see <code class="docutils literal notranslate"><span class="pre">fetch</span></code> and <code class="docutils literal notranslate"><span class="pre">push</span></code> URLs with links to your forked repository under your account (i.e. <code class="docutils literal notranslate"><span class="pre">https://github.com/&lt;your_GitHub_user_name&gt;/peopledepot.git</span></code>). You are all set to make working changes to the code on your local machine.</p>
+<p>However, we still need a way to keep our local repo up to date with the main repo. To do so, you must add an upstream remote to incorporate changes made while you are working on your local repo. Run the following to add an upstream remote URL &amp; update your local repo with recent changes to the <code class="docutils literal notranslate"><span class="pre">hackforla</span></code> version:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>upstream<span class="w"> </span>https://github.com/hackforla/peopledepot.git
+git<span class="w"> </span>fetch<span class="w"> </span>upstream
+</pre></div>
+</div>
+<p>After adding the upstream remote, you should now see it if you again run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">-v</span></code> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>origin<span class="w">  </span>https://github.com/&lt;your_GitHub_user_name&gt;/peopledepot.git<span class="w"> </span><span class="o">(</span>fetch<span class="o">)</span>
+origin<span class="w">  </span>https://github.com/&lt;your_GitHub_user_name&gt;/peopledepot.git<span class="w"> </span><span class="o">(</span>push<span class="o">)</span>
+upstream<span class="w">        </span>https://github.com/hackforla/peopledepot.git<span class="w"> </span><span class="o">(</span>fetch<span class="o">)</span>
+upstream<span class="w">        </span>https://github.com/hackforla/peopledepot.git<span class="w"> </span><span class="o">(</span>push<span class="o">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="build-and-run-using-docker-locally">
+<h3><span class="sectnum">2.3. </span>Build and run using Docker locally<a class="headerlink" href="#build-and-run-using-docker-locally" title="Permalink to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>Make sure the Docker service is running</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
+</input><label class="sd-tab-label" data-sync-id="docker-desktop" for="sd-tab-item-2">
+Docker Desktop</label><div class="sd-tab-content docutils">
+<ol class="arabic simple">
+<li><p>Start Docker Desktop</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">container</span> <span class="pre">ls</span></code> to verify Docker Desktop is running. If it is not running you will get the message: <code class="docutils literal notranslate"><span class="pre">Cannot</span> <span class="pre">connect</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">Docker</span> <span class="pre">daemon</span> <span class="pre">at</span> <span class="pre">unix:///var/run/docker.sock.</span> <span class="pre">Is</span> <span class="pre">the</span> <span class="pre">docker</span> <span class="pre">daemon</span> <span class="pre">running?</span></code></p></li>
+</ol>
+</div>
+<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+</input><label class="sd-tab-label" data-sync-id="docker-engine" for="sd-tab-item-3">
+Docker Engine</label><div class="sd-tab-content docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-4" name="sd-tab-set-2" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-4">
+root install</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>docker
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-5">
+rootless mode</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>systemctl<span class="w"> </span>--user<span class="w"> </span>status<span class="w"> </span>docker
+</pre></div>
+</div>
+</div>
+</div>
+<p>It will show <code class="docutils literal notranslate"><span class="pre">Active:</span> <span class="pre">active</span> <span class="pre">(running)</span></code> if it’s running.</p>
+</div>
+</div>
+</li>
+<li><p>Create an .env.dev file from .env.dev-sample</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>.env.dev-sample<span class="w"> </span>.env.dev
+</pre></div>
+</div>
+</li>
+<li><p>Build and run the project via the script (this includes running <code class="docutils literal notranslate"><span class="pre">docker-compose</span> <span class="pre">up</span></code>)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./scripts/buildrun.sh
+</pre></div>
+</div>
+</li>
+<li><p>Create a super user for logging into the web admin interface</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>python<span class="w"> </span>manage.py<span class="w"> </span>createsuperuser<span class="w"> </span>--no-input
+</pre></div>
+</div>
+</li>
+<li><p>Browse to the web admin interface at <code class="docutils literal notranslate"><span class="pre">http://localhost:8000/admin/</span></code> and confirm the admin site is running. Use DJANGO_SUPERUSER_USERNAME and DJANGO_SUPERUSER_PASSWORD from .env.dev for credentials.</p></li>
+</ol>
+</section>
+</section>
+<section id="managing-docker">
+<h2><span class="sectnum">3. </span>Managing Docker<a class="headerlink" href="#managing-docker" title="Permalink to this heading">#</a></h2>
+<section id="stopping-docker">
+<h3><span class="sectnum">3.1. </span>Stopping Docker<a class="headerlink" href="#stopping-docker" title="Permalink to this heading">#</a></h3>
+<p>To stop the service-container, but not destroy it (often sufficient for day-to-day work):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose<span class="w"> </span>stop
+</pre></div>
+</div>
+<p>To stop and destroy the service container:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose<span class="w"> </span>down
+</pre></div>
+</div>
+<p>Add the <code class="docutils literal notranslate"><span class="pre">-v</span></code> flag to destroy the data volumes as well:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose<span class="w"> </span>down<span class="w"> </span>-v
+</pre></div>
+</div>
+</section>
+<section id="recycling-refreshing-database-for-docker-desktop-only">
+<h3><span class="sectnum">3.2. </span>Recycling / Refreshing Database (for docker desktop only)<a class="headerlink" href="#recycling-refreshing-database-for-docker-desktop-only" title="Permalink to this heading">#</a></h3>
+<p>To restore a database to its original state and remove any data manually added, delete the container and image.
+From Docker:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-6" name="sd-tab-set-3" type="radio">
+</input><label class="sd-tab-label" data-sync-id="docker-desktop" for="sd-tab-item-6">
+Docker Desktop</label><div class="sd-tab-content docutils">
+<ol class="arabic simple">
+<li><p>Open Containers section</p></li>
+<li><p>Delete people-db-1 container</p></li>
+<li><p>Open Images Tab</p></li>
+<li><p>Remove djangorestapipostrgresql image</p></li>
+</ol>
+</div>
+<input id="sd-tab-item-7" name="sd-tab-set-3" type="radio">
+</input><label class="sd-tab-label" data-sync-id="commandline" for="sd-tab-item-7">
+Commandline</label><div class="sd-tab-content docutils">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">down</span> <span class="o">-</span><span class="n">v</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="fixing-issues">
+<h2><span class="sectnum">4. </span>Fixing Issues<a class="headerlink" href="#fixing-issues" title="Permalink to this heading">#</a></h2>
+<section id="find-an-issue">
+<h3><span class="sectnum">4.1. </span>Find an issue<a class="headerlink" href="#find-an-issue" title="Permalink to this heading">#</a></h3>
+<p>Find an issue in Prioritized Backlog <a class="reference external" href="https://github.com/hackforla/peopledepot/projects/1#column-16900748">here</a></p>
+<p>If you joined the peopledepot repository as described in a previous section:</p>
+<ol class="arabic simple">
+<li><p>Assign the issue to yourself and move it to “In progress” column.</p></li>
+<li><p>Follow the steps in the issue description to complete the issue.</p></li>
+<li><p>Make sure to comment your ETA and Availability when you first assign yourself.</p></li>
+</ol>
+<p>If you don’t have privileges, add a comment that you are working on the issue.</p>
+</section>
+<section id="create-a-new-branch">
+<h3><span class="sectnum">4.2. </span>Create a new branch<a class="headerlink" href="#create-a-new-branch" title="Permalink to this heading">#</a></h3>
+<p>Once you have selected an issue to work on, create a branch for that issue.</p>
+<p>Verify you are on the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>branch
+</pre></div>
+</div>
+<p>You will see a list of all of your branches. There will be a star (<code class="docutils literal notranslate"><span class="pre">*</span></code>) next to the branch that you are currently in. By default you should start on the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch.</p>
+<p>If you are not currently in the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch, run the following command to return to it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span>main
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>main
+</pre></div>
+</div>
+<p>This ensures you have the most recent code, which is important if you previously cloned and it has been more than a day.</p>
+<p>Create a new branch where you will work on the issue. The branch name should include the issue number. For example, to create a new branch for issue 15 and change into it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>&lt;new-branch-name&gt;-15
+</pre></div>
+</div>
+</section>
+<section id="make-changes">
+<h3><span class="sectnum">4.3. </span>Make changes<a class="headerlink" href="#make-changes" title="Permalink to this heading">#</a></h3>
+<p>Make changes to fix the issue.</p>
+</section>
+<section id="pull-to-get-the-most-recent-code">
+<h3><span class="sectnum">4.4. </span>Pull to get the most recent code<a class="headerlink" href="#pull-to-get-the-most-recent-code" title="Permalink to this heading">#</a></h3>
+<p>You can probably skip this if you fix the issue on the same day that you pulled the code.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>pull
+</pre></div>
+</div>
+<p><strong>Note:</strong> If you are using Visual studios code you can use the Git graphical user interface to stage your changes. For instructions check out the <a class="reference external" href="https://github.com/hackforla/website/wiki/How-to-Use-Git-GUI-(Graphical-user-Interface)-in-Visual-Studios-Code">Git Gui Wiki</a>.</p>
+</section>
+<section id="add-changed-files-to-staging">
+<h3><span class="sectnum">4.5. </span>Add changed files to staging<a class="headerlink" href="#add-changed-files-to-staging" title="Permalink to this heading">#</a></h3>
+<p><strong>Make sure you are on your issue branch (instead of <code class="docutils literal notranslate"><span class="pre">main</span></code>)</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>branch
+</pre></div>
+</div>
+<p>You must add your files to the staging area before you can commit (save them to git).</p>
+<p>Run this command if you want to <strong>add changes from a specific file to your commit record</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>“filename.ext”
+</pre></div>
+</div>
+<p>Run this command if you want to <strong>add all changes to all file(s) to your commit record</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="check-git-status">
+<h3><span class="sectnum">4.6. </span>Check Git status<a class="headerlink" href="#check-git-status" title="Permalink to this heading">#</a></h3>
+<p>This command will list the files that have been staged with green text. These are the files that will be committed (saved) when you run the next command, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>. Please be sure all your staged changes are relevant to the issue you are working on. If you accidentally included unrelated changes, please unstage them before making this commit, and then make a new commit for the unrelated changes. (The commands for unstaging commits are provided in the output of your <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> command.)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>status
+</pre></div>
+</div>
+</section>
+<section id="remove-files-that-you-don-t-want-staged">
+<h3><span class="sectnum">4.7. </span>Remove files that you don’t want staged<a class="headerlink" href="#remove-files-that-you-don-t-want-staged" title="Permalink to this heading">#</a></h3>
+<p>This command will unstage a file that you don’t want included in the commit. The specified file will not be committed (saved) when you run the next command, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>. This only works if the wrong files were added, but they were not yet committed. (See <a class="reference external" href="https://www.atlassian.com/git/tutorials/resetting-checking-out-and-reverting">this tutorial</a> for an in-depth discussion.) The file will be removed from the staging area, but not actually deleted:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>reset<span class="w"> </span>HEAD<span class="w"> </span>“filename.ext”
+</pre></div>
+</div>
+</section>
+<section id="run-pre-commit-checks">
+<h3><span class="sectnum">4.8. </span>Run pre-commit checks<a class="headerlink" href="#run-pre-commit-checks" title="Permalink to this heading">#</a></h3>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Before committing each file, make sure to run the pre-commit hook:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./scripts/precommit-check.sh
+</pre></div>
+</div>
+</div>
+</section>
+<section id="commit-staged-changes">
+<h3><span class="sectnum">4.9. </span>Commit staged changes<a class="headerlink" href="#commit-staged-changes" title="Permalink to this heading">#</a></h3>
+<p>This command saves your work, and prepares it to push to your repository. Use the <code class="docutils literal notranslate"><span class="pre">-m</span></code> flag to quickly add a message to your commit. Your message should be a short description of the changes you made. It will be extremely helpful if other people can understand your message, so try to resist the temptation to be overly cryptic.</p>
+<p>To commit your changes with a message, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span>“insert<span class="w"> </span>message<span class="w"> </span>here”
+</pre></div>
+</div>
+<p>Ensure that your local repository is up-to-date with the main repo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>pull<span class="w"> </span>upstream
+</pre></div>
+</div>
+<p>You can also sync your fork directly on GitHub by clicking “Sync Fork” at the right of the screen and then clicking “Update Branch”</p>
+<details>
+  <summary><strong>Click here</strong> to see how to sync the fork on GitHub</summary>
+  <img src="https://docs.github.com/assets/cb-49937/images/help/repository/update-branch-button.png" />
+</details>
+</section>
+<section id="push-to-upstream-origin-aka-your-fork">
+<h3><span class="sectnum">4.10. </span>Push to upstream origin (aka, your fork)<a class="headerlink" href="#push-to-upstream-origin-aka-your-fork" title="Permalink to this heading">#</a></h3>
+<p>Push your local branch to your remote repository:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>--set-upstream<span class="w"> </span>origin<span class="w"> </span>&lt;your-branch-name&gt;
+</pre></div>
+</div>
+<p>Alternatively, you can run</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push
+</pre></div>
+</div>
+</section>
+<section id="create-a-pull-request">
+<h3><span class="sectnum">4.11. </span>Create a pull request<a class="headerlink" href="#create-a-pull-request" title="Permalink to this heading">#</a></h3>
+<section id="push-all-changes-in-your-issue-branch">
+<h4><span class="sectnum">4.11.1. </span>Push all changes in your issue branch<a class="headerlink" href="#push-all-changes-in-your-issue-branch" title="Permalink to this heading">#</a></h4>
+<p>Once you are satisfied with your changes, push them to the feature branch you made within your remote repository.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>--set-upstream<span class="w"> </span>origin<span class="w"> </span>&lt;name-of-branch&gt;
+</pre></div>
+</div>
+</section>
+<section id="complete-pull-request-from-github">
+<h4><span class="sectnum">4.11.2. </span>Complete pull request from GitHub<a class="headerlink" href="#complete-pull-request-from-github" title="Permalink to this heading">#</a></h4>
+<ol class="arabic">
+<li><p>Click the green button to create a Pull Request (PR)</p></li>
+<li><p>Add a short title in the subject line</p></li>
+<li><p>In the body of the comment, add the following, replacing <code class="docutils literal notranslate"><span class="pre">&lt;issue-number&gt;</span></code> with the issue you worked on:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fixes<span class="w"> </span><span class="c1">#&lt;issue-number&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Below this, add a brief description of the changes you made</p></li>
+<li><p>Click the green “Create pull request” button</p></li>
+<li><p>Add the PR to the project board</p></li>
+</ol>
+</section>
+</section>
+</section>
+<section id="synch-main-changes">
+<h2><span class="sectnum">5. </span>Synch Main Changes<a class="headerlink" href="#synch-main-changes" title="Permalink to this heading">#</a></h2>
+<p>Your fork of this repository on GitHub, and your local clone of that fork, will get out of sync with the (upstream) repository as others update the repository. (That’s what has happened when you see something like “This branch is 1 commit behind peopledepot:main” on your forked repository.)</p>
+<p>One way to keep your fork up to date with this repository is to follow these instruction: <a class="reference external" href="https://github.com/KirstieJane/STEMMRoleModels/wiki/Syncing-your-fork-to-the-original-repository-via-the-browser">Syncing your fork to the original repository via the browser</a></p>
+<p>You can also update your fork via the local clone of your fork, using these instructions. Assuming you have a local clone with remotes <code class="docutils literal notranslate"><span class="pre">upstream</span></code> (this repo) and <code class="docutils literal notranslate"><span class="pre">origin</span></code> (your GitHub fork of this repo):</p>
+<ul class="simple">
+<li><p>First, you will need to create a local branch which tracks upstream/main. You will only need to do this once; you do not need to do this every time you want to incorporate upstream changes.</p></li>
+</ul>
+<p>Run the following two commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>fetch<span class="w"> </span>upstream
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>upstream-main<span class="w"> </span>--track<span class="w"> </span>upstream/main
+</pre></div>
+</div>
+<p>If you have already created the branch upstream-main, the following commands will incorporate upstream changes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span>upstream-main<span class="w"> </span><span class="c1"># Move to the branch you want to merge with.</span>
+git<span class="w"> </span>pull<span class="w">  </span><span class="c1"># This updates your tracking branch to match the main branch in this repository</span>
+git<span class="w"> </span>checkout<span class="w"> </span>main<span class="w">  </span><span class="c1"># Move back to your main branch</span>
+git<span class="w"> </span>merge<span class="w"> </span>upstream-main<span class="w">  </span><span class="c1"># Merge to bring your main current.</span>
+</pre></div>
+</div>
+<p>If you do all your work on topic branches (as suggested above) and keep main free of local modifications, this merge should apply cleanly.</p>
+<p>Then push the merge changes to your GitHub fork:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push
+</pre></div>
+</div>
+<p>If you go to your online GitHub repository this should remove the message “This branch is x commit behind peopledepot:main”.</p>
+</section>
+<section id="creating-issues">
+<h2><span class="sectnum">6. </span>Creating Issues<a class="headerlink" href="#creating-issues" title="Permalink to this heading">#</a></h2>
+<p>To create a new issue, please use the blank issue template (available when you click New Issue). If you want to create an issue for other projects to use, please create the issue in your own repository and send a slack message to one of your hack night hosts with the link.</p>
+</section>
+<section id="pre-commit-hooks">
+<h2><span class="sectnum">7. </span>Pre-commit Hooks<a class="headerlink" href="#pre-commit-hooks" title="Permalink to this heading">#</a></h2>
+<p>The pre-commit hook in git is currently a work in progress.</p>
+<p>The pre-commit hook in git will run before each commit and will abort the commit on failure. The advantage of this over GitHub Actions is that GitHub Actions work on code that’s already committed, so it needs to allow code to be committed first.</p>
+<p>We’re setting a set of fast checks to run on each commit and longer checks such as a full rebuild to run when trying to push the code.</p>
+<p>The hooks run when doing normal <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> commands. It’s recommended to do this in the command line. If performing these actions from a gui application, the interface may seem to hang for some time.</p>
+<p>Installing the pre-commit hooks to git</p>
+<ol class="arabic">
+<li><p>Install pre-commit (virtual environment or at least per-user install is recommended)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pre-commit<span class="w"> </span>--local
+</pre></div>
+</div>
+</li>
+<li><p>Add the hook to git</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pre-commit<span class="w"> </span>install
+</pre></div>
+</div>
+</li>
+<li><p>Update pre-commit and plugins to the latest version</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pre-commit<span class="w"> </span>autoupdate
+</pre></div>
+</div>
+</li>
+<li><p>Test run the hooks (this runs it against all files rather than only staged files)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pre-commit<span class="w"> </span>run<span class="w"> </span>--all-files
+</pre></div>
+</div>
+</li>
+<li><p>(Extra info) More commands to test run the hooks</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pre-commit<span class="w"> </span>run<span class="w"> </span>--all-files<span class="w"> </span>--hook-stage<span class="w"> </span>push
+pre-commit<span class="w"> </span>run<span class="w"> </span>--all-files<span class="w"> </span>--hook-stage<span class="w"> </span>commit
+pre-commit<span class="w"> </span>run<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--all-files<span class="w"> </span>--hook-stage<span class="w"> </span>push
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="appendix">
+<h2><span class="sectnum">8. </span>Appendix<a class="headerlink" href="#appendix" title="Permalink to this heading">#</a></h2>
+<section id="convenience-scripts">
+<h3><span class="sectnum">8.1. </span>Convenience Scripts<a class="headerlink" href="#convenience-scripts" title="Permalink to this heading">#</a></h3>
+<p>These scripts assume you are using bash.</p>
+<ol class="arabic simple">
+<li><p>buildrun.sh - clean, build, and run containers in background mode</p></li>
+<li><p>lint.sh - lint and and auto-format code</p></li>
+<li><p>test.sh - run tests and generate test coverage report</p></li>
+<li><p>logs.sh - view/tail container logs</p></li>
+<li><p>migrate.sh - run database migrations inside container</p></li>
+<li><p>precommit-check.sh - sanity checks before committing code</p></li>
+<li><p>createsuperuser.sh - creates a default superuser (assumes debian env.)</p></li>
+</ol>
+</section>
+<section id="submitting-bugs-for-third-party-packages-apps">
+<h3><span class="sectnum">8.2. </span>Submitting Bugs for Third Party Packages / Apps<a class="headerlink" href="#submitting-bugs-for-third-party-packages-apps" title="Permalink to this heading">#</a></h3>
+<p>You can go to these links and submit an issue:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/docker">Docker</a></p></li>
+<li><p><a class="reference external" href="https://github.com/pycqa/flake8">Flake8</a></p></li>
+<li><p><a class="reference external" href="https://github.com/psf/black">Black</a></p></li>
+<li><p><a class="reference external" href="https://github.com/pycqa/isort/">isort</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="how-to/add-model-and-api-endpoints.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title"><span class="sectnum"> </span>Add new model and API endpoints</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="architecture/Notes.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Misc Notes</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Civic Tech Structure
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#"><span class="sectnum"> </span>Contributing to People Depot</a><ul>
+<li><a class="reference internal" href="#joining-repository-team"><span class="sectnum">1. </span>Joining Repository Team</a></li>
+<li><a class="reference internal" href="#setting-up-development-environment"><span class="sectnum">2. </span>Setting Up Development Environment</a><ul>
+<li><a class="reference internal" href="#pre-requisites"><span class="sectnum">2.1. </span>Pre-requisites</a><ul>
+<li><a class="reference internal" href="#github-account"><span class="sectnum">2.1.1. </span>GitHub account</a></li>
+<li><a class="reference internal" href="#two-factor-authentication"><span class="sectnum">2.1.2. </span>Two-factor authentication</a></li>
+<li><a class="reference internal" href="#text-editor"><span class="sectnum">2.1.3. </span>Text editor</a></li>
+<li><a class="reference internal" href="#install-git"><span class="sectnum">2.1.4. </span>Install Git</a></li>
+<li><a class="reference internal" href="#install-docker"><span class="sectnum">2.1.5. </span>Install Docker</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#fork-the-repository"><span class="sectnum">2.2. </span>Fork the repository</a><ul>
+<li><a class="reference internal" href="#clone-a-copy-on-your-computer"><span class="sectnum">2.2.1. </span>Clone a copy on your computer</a></li>
+<li><a class="reference internal" href="#verify-and-set-up-remote-references"><span class="sectnum">2.2.2. </span>Verify and set up remote references</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#build-and-run-using-docker-locally"><span class="sectnum">2.3. </span>Build and run using Docker locally</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#managing-docker"><span class="sectnum">3. </span>Managing Docker</a><ul>
+<li><a class="reference internal" href="#stopping-docker"><span class="sectnum">3.1. </span>Stopping Docker</a></li>
+<li><a class="reference internal" href="#recycling-refreshing-database-for-docker-desktop-only"><span class="sectnum">3.2. </span>Recycling / Refreshing Database (for docker desktop only)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#fixing-issues"><span class="sectnum">4. </span>Fixing Issues</a><ul>
+<li><a class="reference internal" href="#find-an-issue"><span class="sectnum">4.1. </span>Find an issue</a></li>
+<li><a class="reference internal" href="#create-a-new-branch"><span class="sectnum">4.2. </span>Create a new branch</a></li>
+<li><a class="reference internal" href="#make-changes"><span class="sectnum">4.3. </span>Make changes</a></li>
+<li><a class="reference internal" href="#pull-to-get-the-most-recent-code"><span class="sectnum">4.4. </span>Pull to get the most recent code</a></li>
+<li><a class="reference internal" href="#add-changed-files-to-staging"><span class="sectnum">4.5. </span>Add changed files to staging</a></li>
+<li><a class="reference internal" href="#check-git-status"><span class="sectnum">4.6. </span>Check Git status</a></li>
+<li><a class="reference internal" href="#remove-files-that-you-don-t-want-staged"><span class="sectnum">4.7. </span>Remove files that you don’t want staged</a></li>
+<li><a class="reference internal" href="#run-pre-commit-checks"><span class="sectnum">4.8. </span>Run pre-commit checks</a></li>
+<li><a class="reference internal" href="#commit-staged-changes"><span class="sectnum">4.9. </span>Commit staged changes</a></li>
+<li><a class="reference internal" href="#push-to-upstream-origin-aka-your-fork"><span class="sectnum">4.10. </span>Push to upstream origin (aka, your fork)</a></li>
+<li><a class="reference internal" href="#create-a-pull-request"><span class="sectnum">4.11. </span>Create a pull request</a><ul>
+<li><a class="reference internal" href="#push-all-changes-in-your-issue-branch"><span class="sectnum">4.11.1. </span>Push all changes in your issue branch</a></li>
+<li><a class="reference internal" href="#complete-pull-request-from-github"><span class="sectnum">4.11.2. </span>Complete pull request from GitHub</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#synch-main-changes"><span class="sectnum">5. </span>Synch Main Changes</a></li>
+<li><a class="reference internal" href="#creating-issues"><span class="sectnum">6. </span>Creating Issues</a></li>
+<li><a class="reference internal" href="#pre-commit-hooks"><span class="sectnum">7. </span>Pre-commit Hooks</a></li>
+<li><a class="reference internal" href="#appendix"><span class="sectnum">8. </span>Appendix</a><ul>
+<li><a class="reference internal" href="#convenience-scripts"><span class="sectnum">8.1. </span>Convenience Scripts</a></li>
+<li><a class="reference internal" href="#submitting-bugs-for-third-party-packages-apps"><span class="sectnum">8.2. </span>Submitting Bugs for Third Party Packages / Apps</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/design-tabs.js"></script>
+    </body>
+</html>

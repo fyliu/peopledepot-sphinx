@@ -1,0 +1,912 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Sphinx" href="../tools/sphinx.html" /><link rel="prev" title="Contributing to People Depot" href="../CONTRIBUTING.html" />
+
+    <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
+        <title>Add new model and API endpoints - People Depot</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">People Depot</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">People Depot</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Get started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Architecture:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/authentication.html">Cognito authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/Notes.html">Misc Notes</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer guides:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html"><span class="sectnum"> </span>Contributing to People Depot</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#"><span class="sectnum"> </span>Add new model and API endpoints</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tools:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sphinx.html">Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/scripts.html">Convenience Scripts</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/hackforla/peopledepot/edit/main/docs/how-to/add-model-and-api-endpoints.md" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="add-new-model-and-api-endpoints">
+<h1><span class="sectnum"> </span>Add new model and API endpoints<a class="headerlink" href="#add-new-model-and-api-endpoints" title="Permalink to this heading">#</a></h1>
+<p>This guide aims to enable developers with little or no django experience to add django models and API endpoints to the project. Most code examples are followed by detailed explanations.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+The developer will have exposure to the following skills in this document<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<ul class="simple">
+<li><p class="sd-card-text">python</p></li>
+<li><p class="sd-card-text">django</p></li>
+<li><p class="sd-card-text">django rest framework</p></li>
+<li><p class="sd-card-text">relational database through the Django ORM (object-relational mapper)</p></li>
+<li><p class="sd-card-text">data types</p></li>
+<li><p class="sd-card-text">object-oriented concepts (object, inheritance, composition)</p></li>
+<li><p class="sd-card-text">unit testing</p></li>
+<li><p class="sd-card-text">API design</p></li>
+<li><p class="sd-card-text">command line</p></li>
+</ul>
+</div>
+</details><p>This guide assumes the developer has followed the <a class="reference internal" href="../CONTRIBUTING.html"><span class="doc std std-doc">contributing doc</span></a> and have forked and created a local branch to work on this. The development server would be already running in the background and will automatically apply the changes when we save the files.</p>
+<p>We will choose the <a class="reference external" href="https://github.com/hackforla/peopledepot/issues/14">recurring_event issue</a> as an example. Our goal is to create a database table and an API that a client can use to work with the data. The work is split into 3 testable components: the model, the admin site, and the API</p>
+<p>Let’s start!</p>
+<section id="data-model">
+<h2><span class="sectnum">1. </span>Data model<a class="headerlink" href="#data-model" title="Permalink to this heading">#</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+TDD section<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<ol class="arabic">
+<li><p class="sd-card-text">Write the test</p>
+<p class="sd-card-text">We would like the model to store these data, and to return the name property in the str function.</p>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">app/core/tests/test_models.py</span><a class="headerlink" href="#id9" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">test_recurring_event_model</span><span class="p">(</span><span class="n">project</span><span class="p">):</span>
+<span class="linenos"> 2</span>    <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span>    <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos"> 5</span>        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;test event&quot;</span><span class="p">,</span>
+<span class="linenos"> 6</span>        <span class="s2">&quot;start_time&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">34</span><span class="p">),</span>
+<span class="linenos"> 7</span>        <span class="s2">&quot;duration_in_min&quot;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+<span class="linenos"> 8</span>        <span class="s2">&quot;video_conference_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://zoom.com/mtg/1234&quot;</span><span class="p">,</span>
+<span class="linenos"> 9</span>        <span class="s2">&quot;additional_info&quot;</span><span class="p">:</span> <span class="s2">&quot;long description&quot;</span><span class="p">,</span>
+<span class="linenos">10</span>        <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project</span><span class="p">,</span>
+<span class="linenos">11</span>    <span class="p">}</span>
+<span class="linenos">12</span>    <span class="n">recurring_event</span> <span class="o">=</span> <span class="n">RecurringEvent</span><span class="p">(</span><span class="o">**</span><span class="n">payload</span><span class="p">)</span>
+<span class="linenos">13</span>    <span class="c1"># recurring_event.save()</span>
+<span class="linenos">14</span>    <span class="k">assert</span> <span class="n">recurring_event</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+<span class="linenos">15</span>    <span class="k">assert</span> <span class="n">recurring_event</span><span class="o">.</span><span class="n">start_time</span> <span class="o">==</span> <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;start_time&quot;</span><span class="p">]</span>
+<span class="linenos">16</span>    <span class="k">assert</span> <span class="n">recurring_event</span><span class="o">.</span><span class="n">duration_in_min</span> <span class="o">==</span> <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;duration_in_min&quot;</span><span class="p">]</span>
+<span class="linenos">17</span>    <span class="k">assert</span> <span class="n">recurring_event</span><span class="o">.</span><span class="n">video_conference_url</span> <span class="o">==</span> <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;video_conference_url&quot;</span><span class="p">]</span>
+<span class="linenos">18</span>    <span class="k">assert</span> <span class="n">recurring_event</span><span class="o">.</span><span class="n">additional_info</span> <span class="o">==</span> <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;additional_info&quot;</span><span class="p">]</span>
+<span class="linenos">19</span>    <span class="k">assert</span> <span class="n">recurring_event</span><span class="o">.</span><span class="n">project</span> <span class="o">==</span> <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;project&quot;</span><span class="p">]</span>
+<span class="linenos">20</span>    <span class="k">assert</span> <span class="nb">str</span><span class="p">(</span><span class="n">recurring_event</span><span class="p">)</span> <span class="o">==</span> <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</li>
+<li><p class="sd-card-text">See it fail</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">run the following</span><a class="headerlink" href="#id10" title="Permalink to this code">#</a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./scripts/test.sh
+</pre></div>
+</div>
+</div>
+</li>
+<li><p class="sd-card-text">Run it after implementing the model to make sure the code satisfies the test</p></li>
+</ol>
+</div>
+</details><section id="add-the-model">
+<h3><span class="sectnum">1.1. </span>Add the model<a class="headerlink" href="#add-the-model" title="Permalink to this heading">#</a></h3>
+<p>Add the following to app/core/models.py</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text">app/core/models.py</span><a class="headerlink" href="#id11" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">RecurringEvent</span><span class="p">(</span><span class="n">AbstractBaseModel</span><span class="p">):</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span><span class="sd">    Recurring Events</span>
+<span class="linenos"> 4</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span>    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
+<span class="linenos"> 7</span>    <span class="n">start_time</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TimeField</span><span class="p">(</span><span class="s2">&quot;Start&quot;</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos"> 8</span>    <span class="n">duration_in_min</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos"> 9</span>    <span class="n">video_conference_url</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">URLField</span><span class="p">(</span><span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">10</span>    <span class="n">additional_info</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>    <span class="n">project</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Project</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+<span class="linenos">13</span>    <span class="c1"># location_id = models.ForeignKey(&quot;Location&quot;, on_delete=models.DO_NOTHING)</span>
+<span class="linenos">14</span>    <span class="c1"># event_type_id = models.ForeignKey(&quot;EventType&quot;, on_delete=models.DO_NOTHING)</span>
+<span class="linenos">15</span>    <span class="c1"># brigade_id = models.ForeignKey(&quot;Brigade&quot;, on_delete=models.DO_NOTHING)</span>
+<span class="linenos">16</span>    <span class="c1"># day_of_week = models.ForeignKey(&quot;DayOfWeek&quot;, on_delete=models.DO_NOTHING)</span>
+<span class="linenos">17</span>    <span class="c1"># must_roles = models.ManyToManyField(&quot;Role&quot;)</span>
+<span class="linenos">18</span>    <span class="c1"># should_roles = models.ManyToManyField(&quot;Role&quot;)</span>
+<span class="linenos">19</span>    <span class="c1"># could_roles = models.ManyToManyField(&quot;Role&quot;)</span>
+<span class="linenos">20</span>    <span class="c1"># frequency_id = models.ForeignKey(&quot;Frequency&quot;, on_delete=models.DO_NOTHING)</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">23</span>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple">
+<li><p>We inherit all models from AbstractBaseModel, which provides a <code class="docutils literal notranslate"><span class="pre">uuid</span></code> primary key, <code class="docutils literal notranslate"><span class="pre">created_at</span></code>, and <code class="docutils literal notranslate"><span class="pre">updated_at</span></code> timestamps. In the Github issue, these fields might be called <code class="docutils literal notranslate"><span class="pre">id</span></code>, <code class="docutils literal notranslate"><span class="pre">created</span></code>, and <code class="docutils literal notranslate"><span class="pre">updated</span></code>. There’s no need to add those.</p></li>
+<li><p>Most fields should not be required. Text fields should be <code class="docutils literal notranslate"><span class="pre">blank=True</span></code>, data fields should be <code class="docutils literal notranslate"><span class="pre">null=True</span></code>.</p></li>
+<li><p>The data types in the github issue may be given in database column types such as <code class="docutils literal notranslate"><span class="pre">INTEGER</span></code>, <code class="docutils literal notranslate"><span class="pre">VARCHAR</span></code>, but we need to convert them into <a class="reference external" href="https://docs.djangoproject.com/en/4.1/ref/models/fields/#model-field-types">Django field types</a> when defining the model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VARCHAR</span></code> can be either <code class="docutils literal notranslate"><span class="pre">CharField</span></code> or <code class="docutils literal notranslate"><span class="pre">TextField</span></code>.</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CharField</span></code> has a <code class="docutils literal notranslate"><span class="pre">max_length</span></code>, which makes it useful for finite length text data. We’re going default to giving them <code class="docutils literal notranslate"><span class="pre">max_length=255</span></code> unless there’s a better value like <code class="docutils literal notranslate"><span class="pre">max_length=2</span></code> for state abbreviation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TextField</span></code> doesn’t have a maximum length, which makes it ideal for large text fields such as <code class="docutils literal notranslate"><span class="pre">description</span></code>.</p></li>
+</ol>
+</li>
+<li><p>Try to add the relationships to non-existent models, but comment them out. Another developer will complete them when they go to implement those models.</p></li>
+<li><p>Always override the <code class="docutils literal notranslate"><span class="pre">__str__</span></code> function to output something more meaningful than the default. It lets us do a quick test of the model by calling <code class="docutils literal notranslate"><span class="pre">str([model])</span></code>. It’s also useful for the admin site model list view.</p></li>
+</ol>
+</section>
+<section id="run-migrations">
+<h3><span class="sectnum">1.2. </span>Run migrations<a class="headerlink" href="#run-migrations" title="Permalink to this heading">#</a></h3>
+<p>Run migrations to generate database migration files</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./scripts/migrate.sh
+</pre></div>
+</div>
+</section>
+<section id="write-a-simple-test">
+<h3><span class="sectnum">1.3. </span>Write a simple test<a class="headerlink" href="#write-a-simple-test" title="Permalink to this heading">#</a></h3>
+<p>Since we overrode the <code class="docutils literal notranslate"><span class="pre">__str__</span></code> function, we need to write a test for it.</p>
+<ol class="arabic">
+<li><p>Add a fixture for the model</p>
+<p>Fixtures are reusable code that can be used in multiple tests by declaring them as parameters of the test case. In this example, we show both defining a fixture (recurring_event) and using another fixture (project).</p>
+<p>Note: The conftest file is meant to hold shared test fixtures, among other things. The fixtures have directory scope.</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-text">app/core/tests/conftest.py</span><a class="headerlink" href="#id12" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="linenos">2</span><span class="k">def</span> <span class="nf">recurring_event</span><span class="p">(</span><span class="n">project</span><span class="p">):</span>
+<span class="linenos">3</span>    <span class="k">return</span> <span class="n">RecurringEvent</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Test Recurring Event&quot;</span><span class="p">,</span> <span class="n">project</span><span class="o">=</span><span class="n">project</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple">
+<li><p>We name the fixture after the model name (<code class="docutils literal notranslate"><span class="pre">recurring_event</span></code>).</p></li>
+<li><p>This model makes use of the <code class="docutils literal notranslate"><span class="pre">project</span></code> model as a foreign key relation, so we pass in the <code class="docutils literal notranslate"><span class="pre">project</span></code> fixture, which creates a <code class="docutils literal notranslate"><span class="pre">project</span></code> model.</p></li>
+<li><p>We create an object of the new model, passing in at least the required fields. In this case, we passed in enough arguments to use the <code class="docutils literal notranslate"><span class="pre">__str__</span></code> method in a test.</p></li>
+</ol>
+</li>
+<li><p>Add a test case</p>
+<p>When creating Django models, there’s no need to test the CRUD functionality since Django itself is well-tested and we can expect it to generate the correct CRUD functionality. Feel free to write some tests for practice. What really needs testing are any custom code that’s not part of Django. Sometimes we need to override the default Django behavior and that should be tested.</p>
+<p>Here’s a basic test to see that the model stores its name.</p>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-text">app/core/tests/test_models.py</span><a class="headerlink" href="#id13" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span> <span class="nf">test_recurring_event</span><span class="p">(</span><span class="n">recurring_event</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="k">assert</span> <span class="nb">str</span><span class="p">(</span><span class="n">recurring_event</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Test Recurring Event&quot;</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple">
+<li><p>Pass in our fixture so that the model object is created for us.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">__str__</span></code> method should be tested since it’s an override of the default Django method.</p></li>
+<li><p>Write assertion(s) to check that what’s passed into the model is what it contains. The simplest thing to check is the <code class="docutils literal notranslate"><span class="pre">__str__</span></code> method.</p></li>
+</ol>
+</li>
+<li><p>Run the test script to show it passing</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./scripts/test.sh
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="check-point-1">
+<h3><span class="sectnum">1.4. </span>Check point 1<a class="headerlink" href="#check-point-1" title="Permalink to this heading">#</a></h3>
+<p>This is a good place to pause, check, and commit progress.</p>
+<ol class="arabic">
+<li><p>Run pre-commit checks</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./scripts/precommit-check.sh
+</pre></div>
+</div>
+</li>
+<li><p>Add and commit changes</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>-A
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;feat: add model: recurring_event&quot;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+<section id="admin-site">
+<h2><span class="sectnum">2. </span>Admin site<a class="headerlink" href="#admin-site" title="Permalink to this heading">#</a></h2>
+<p>Django comes with an admin site interface that allows admin users to view and change the data in the models. It’s essentially a database viewer.</p>
+<section id="register-the-model">
+<h3><span class="sectnum">2.1. </span>Register the model<a class="headerlink" href="#register-the-model" title="Permalink to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>Import the new model</p>
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-text">app/core/admin.py</span><a class="headerlink" href="#id14" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Project</span>
+</pre></div>
+</div>
+</div>
+</li>
+<li><p>Register the model with the admin site</p>
+<div class="literal-block-wrapper docutils container" id="id15">
+<div class="code-block-caption"><span class="caption-text">app/core/admin.py</span><a class="headerlink" href="#id15" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="nd">@admin</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">RecurringEvent</span><span class="p">)</span>
+<span class="linenos">2</span><span class="k">class</span> <span class="nc">RecurringEventAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+<span class="linenos">3</span>    <span class="n">list_display</span> <span class="o">=</span> <span class="p">(</span>
+<span class="linenos">4</span>        <span class="s2">&quot;name&quot;</span><span class="p">,</span>
+<span class="linenos">5</span>        <span class="s2">&quot;start_time&quot;</span><span class="p">,</span>
+<span class="linenos">6</span>        <span class="s2">&quot;duration_in_min&quot;</span><span class="p">,</span>
+<span class="linenos">7</span>    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple">
+<li><p>The class name ends with <code class="docutils literal notranslate"><span class="pre">Admin</span></code> to identify what it is. In this case: <code class="docutils literal notranslate"><span class="pre">RecurringEventAdmin</span></code></p></li>
+<li><p>We declare a <a class="reference external" href="https://docs.djangoproject.com/en/4.0/ref/contrib/admin/#django.contrib.admin.ModelAdmin">ModelAdmin</a> class so we can customize the fields that we expose to the admin interface.</p></li>
+<li><p>We use the <a class="reference external" href="https://docs.djangoproject.com/en/4.0/ref/contrib/admin/#django.contrib.admin.register">register decorator</a> to register the class with the admin site.</p></li>
+<li><p><a class="reference external" href="https://docs.djangoproject.com/en/4.0/ref/contrib/admin/#django.contrib.admin.ModelAdmin.list_display">list_display</a> controls what’s shown in the list view</p></li>
+<li><p><a class="reference external" href="https://docs.djangoproject.com/en/4.0/ref/contrib/admin/#django.contrib.admin.ModelAdmin.list_filter">list_filter</a> adds filter controls to declared fields (useful, but not shown in this example).</p></li>
+</ol>
+</li>
+</ol>
+</section>
+<section id="view-the-admin-site">
+<h3><span class="sectnum">2.2. </span>View the admin site<a class="headerlink" href="#view-the-admin-site" title="Permalink to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>Check that everything’s working and there are no issues, which should be the case unless there’s custom input fields creating problems.</p></li>
+<li><p>See the <a class="reference internal" href="../CONTRIBUTING.html"><span class="doc std std-doc">contributing doc section on “Build and run using Docker locally”</span></a> for how to view the admin interface.</p></li>
+<li><p>Example of a custom field (as opposed to the built-in ones)</p>
+<div class="literal-block-wrapper docutils container" id="id16">
+<div class="code-block-caption"><span class="caption-text">app/core/admin.py</span><a class="headerlink" href="#id16" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">time_zone</span> <span class="o">=</span> <span class="n">TimeZoneField</span><span class="p">(</span><span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_pytz</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;America/Los_Angeles&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple">
+<li><p>Having a misconfigured or buggy custom field could cause the admin site to crash and the developer will need to look at the debug message and resolve it.</p></li>
+</ol>
+</li>
+</ol>
+</section>
+<section id="tests">
+<h3><span class="sectnum">2.3. </span>Tests<a class="headerlink" href="#tests" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Feel free to write tests for the admin. There’s no example for it yet.</p></li>
+<li><p>The reason there’s no tests is that the admin site is independent of the API functionality, and we’re mainly interested in the API part.</p></li>
+<li><p>When the time comes that we depend on the admin interface, we will need to have tests for the needed functionalities.</p></li>
+</ol>
+</section>
+<section id="check-point-2">
+<h3><span class="sectnum">2.4. </span>Check point 2<a class="headerlink" href="#check-point-2" title="Permalink to this heading">#</a></h3>
+<p>This is a good place to pause, check, and commit progress.</p>
+<ol class="arabic">
+<li><p>Run pre-commit checks</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./scripts/precommit-check.sh
+</pre></div>
+</div>
+</li>
+<li><p>Add and commit changes</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>-A
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;feat: register admin: recurring_event&quot;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+<section id="api">
+<h2><span class="sectnum">3. </span>API<a class="headerlink" href="#api" title="Permalink to this heading">#</a></h2>
+<p>There’s several components to adding API endpoints: Model(already done), Serializer, View, and Router.</p>
+<section id="add-serializer">
+<h3><span class="sectnum">3.1. </span>Add serializer<a class="headerlink" href="#add-serializer" title="Permalink to this heading">#</a></h3>
+<p>This is code that serializes objects into strings for the API endpoints, and deserializes strings into object when we receive data from the client.</p>
+<ol class="arabic">
+<li><p>Import the new model</p>
+<div class="literal-block-wrapper docutils container" id="id17">
+<div class="code-block-caption"><span class="caption-text">app/core/api/serializers.py</span><a class="headerlink" href="#id17" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">core.models</span> <span class="kn">import</span> <span class="n">RecurringEvent</span>
+</pre></div>
+</div>
+</div>
+</li>
+<li><p>Add a serializer class</p>
+<div class="literal-block-wrapper docutils container" id="id18">
+<div class="code-block-caption"><span class="caption-text">app/core/api/serializers.py</span><a class="headerlink" href="#id18" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">RecurringEventSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Used to retrieve recurring_event info&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="linenos"> 5</span>        <span class="n">model</span> <span class="o">=</span> <span class="n">RecurringEvent</span>
+<span class="linenos"> 6</span>        <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span>
+<span class="linenos"> 7</span>            <span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="linenos"> 8</span>            <span class="s2">&quot;name&quot;</span><span class="p">,</span>
+<span class="linenos"> 9</span>            <span class="s2">&quot;start_time&quot;</span><span class="p">,</span>
+<span class="linenos">10</span>            <span class="s2">&quot;duration_in_min&quot;</span><span class="p">,</span>
+<span class="linenos">11</span>            <span class="s2">&quot;video_conference_url&quot;</span><span class="p">,</span>
+<span class="linenos">12</span>            <span class="s2">&quot;additional_info&quot;</span><span class="p">,</span>
+<span class="linenos">13</span>            <span class="s2">&quot;project&quot;</span><span class="p">,</span>
+<span class="linenos">14</span>        <span class="p">)</span>
+<span class="linenos">15</span>        <span class="n">read_only_fields</span> <span class="o">=</span> <span class="p">(</span>
+<span class="linenos">16</span>            <span class="s2">&quot;uuid&quot;</span><span class="p">,</span>
+<span class="linenos">17</span>            <span class="s2">&quot;created_at&quot;</span><span class="p">,</span>
+<span class="linenos">18</span>            <span class="s2">&quot;updated_at&quot;</span><span class="p">,</span>
+<span class="linenos">19</span>        <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple">
+<li><p>We inherit from <a class="reference external" href="https://www.django-rest-framework.org/api-guide/serializers/#modelserializer">ModelSerializer</a>. It knows how to serialize/deserialize the Django built-in data fields so we don’t have to write the code to do it.</p></li>
+<li><p>We do need to pass in the <code class="docutils literal notranslate"><span class="pre">model</span></code>, the <code class="docutils literal notranslate"><span class="pre">fields</span></code> we want to expose through the API, and any <code class="docutils literal notranslate"><span class="pre">read_only_fields</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">uuid</span></code>, <code class="docutils literal notranslate"><span class="pre">created_at</span></code>, and <code class="docutils literal notranslate"><span class="pre">updated_at</span></code> are managed by automations and are always read-only.</p></li>
+</ol>
+</li>
+<li><p>Custom data fields may need extra code in the serializer</p>
+<div class="literal-block-wrapper docutils container" id="id19">
+<div class="code-block-caption"><span class="caption-text">app/core/api/serializers.py</span><a class="headerlink" href="#id19" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">time_zone</span> <span class="o">=</span> <span class="n">TimeZoneSerializerField</span><span class="p">(</span><span class="n">use_pytz</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple">
+<li><p>This non-built-in model field provides a serializer so we just point to it.</p></li>
+</ol>
+</li>
+<li><p>Custom validators if we need them</p>
+<p>We will need to write custom validators here if we want custom behavior, such as validating URL strings and limit them to the github user profile pattern using regular expression, for example.</p>
+</li>
+</ol>
+</section>
+<section id="add-viewset">
+<h3><span class="sectnum">3.2. </span>Add viewset<a class="headerlink" href="#add-viewset" title="Permalink to this heading">#</a></h3>
+<p>Viewset defines the set of API endpoints for the model.</p>
+<ol class="arabic">
+<li><p>Import the serializer</p>
+<div class="literal-block-wrapper docutils container" id="id20">
+<div class="code-block-caption"><span class="caption-text">app/core/api/views.py</span><a class="headerlink" href="#id20" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="n">RecurringEvent</span>
+</pre></div>
+</div>
+</div>
+</li>
+<li><p>Add the <a class="reference external" href="https://www.django-rest-framework.org/api-guide/viewsets/">viewset</a> and CRUD API endpoint descriptions</p>
+<div class="literal-block-wrapper docutils container" id="id21">
+<div class="code-block-caption"><span class="caption-text">app/core/api/views.py</span><a class="headerlink" href="#id21" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nd">@extend_schema_view</span><span class="p">(</span>
+<span class="linenos"> 2</span>    <span class="nb">list</span><span class="o">=</span><span class="n">extend_schema</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Return a list of all the recurring events&quot;</span><span class="p">),</span>
+<span class="linenos"> 3</span>    <span class="n">create</span><span class="o">=</span><span class="n">extend_schema</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Create a new recurring event&quot;</span><span class="p">),</span>
+<span class="linenos"> 4</span>    <span class="n">retrieve</span><span class="o">=</span><span class="n">extend_schema</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Return the details of a recurring event&quot;</span><span class="p">),</span>
+<span class="linenos"> 5</span>    <span class="n">destroy</span><span class="o">=</span><span class="n">extend_schema</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Delete a recurring event&quot;</span><span class="p">),</span>
+<span class="linenos"> 6</span>    <span class="n">update</span><span class="o">=</span><span class="n">extend_schema</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Update a recurring event&quot;</span><span class="p">),</span>
+<span class="linenos"> 7</span>    <span class="n">partial_update</span><span class="o">=</span><span class="n">extend_schema</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Patch a recurring event&quot;</span><span class="p">),</span>
+<span class="linenos"> 8</span><span class="p">)</span>
+<span class="linenos"> 9</span><span class="k">class</span> <span class="nc">RecurringEventViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+<span class="linenos">10</span>    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">IsAuthenticated</span><span class="p">]</span>
+<span class="linenos">11</span>    <span class="n">queryset</span> <span class="o">=</span> <span class="n">RecurringEvent</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<span class="linenos">12</span>    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">RecurringEventSerializer</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple">
+<li><p>We inherit from <a class="reference external" href="https://www.django-rest-framework.org/api-guide/viewsets/#modelviewset">ModelViewSet</a>, which provides a default view implementation of all 6 CRUD actions: <code class="docutils literal notranslate"><span class="pre">create</span></code>, <code class="docutils literal notranslate"><span class="pre">retrieve</span></code>, <code class="docutils literal notranslate"><span class="pre">partial_update</span></code>, <code class="docutils literal notranslate"><span class="pre">update</span></code>, <code class="docutils literal notranslate"><span class="pre">destroy</span></code>, <code class="docutils literal notranslate"><span class="pre">list</span></code>.</p></li>
+<li><p>We use the <code class="docutils literal notranslate"><span class="pre">extend_schema_view</span></code> decorator to attach the API doc strings to the viewset. They are usually defined as docstrings of the corresponding function definitions inside the viewset. Since we use <code class="docutils literal notranslate"><span class="pre">ModelViewSet</span></code>, there’s nowhere to put the docstrings but above the viewset.</p></li>
+<li><p>The minimum code we need with <code class="docutils literal notranslate"><span class="pre">ModelViewSet</span></code> are the <code class="docutils literal notranslate"><span class="pre">queryset</span></code>, and the <code class="docutils literal notranslate"><span class="pre">serializer_class</span></code>.</p></li>
+<li><p>Permissions</p>
+<ol class="arabic simple">
+<li><p>For now use <code class="docutils literal notranslate"><span class="pre">permission_classes</span> <span class="pre">=</span> <span class="pre">[IsAuthenticated]</span></code></p></li>
+<li><p>It doesn’t control permissions the way we want, but we will fix it later.</p></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</section>
+<section id="extended-example">
+<h3><span class="sectnum">3.3. </span>Extended example<a class="headerlink" href="#extended-example" title="Permalink to this heading">#</a></h3>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Query params<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">This example shows how to add a filter params. It’s done for the <a class="reference external" href="https://github.com/hackforla/peopledepot/issues/15">user model</a> as a <a class="reference external" href="https://github.com/hackforla/peopledepot/issues/10">requirement</a> from VRMS.</p>
+<div class="literal-block-wrapper docutils container" id="id22">
+<div class="code-block-caption"><span class="caption-text">app/core/api/views.py</span><a class="headerlink" href="#id22" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nd">@extend_schema_view</span><span class="p">(</span>
+<span class="linenos"> 2</span>    <span class="nb">list</span><span class="o">=</span><span class="n">extend_schema</span><span class="p">(</span>
+<span class="linenos"> 3</span>        <span class="n">summary</span><span class="o">=</span><span class="s2">&quot;Users List&quot;</span><span class="p">,</span>
+<span class="linenos"> 4</span>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Return a list of all the existing users&quot;</span><span class="p">,</span>
+<span class="linenos"> 5</span>        <span class="n">parameters</span><span class="o">=</span><span class="p">[</span>
+<span class="linenos"> 6</span>            <span class="n">OpenApiParameter</span><span class="p">(</span>
+<span class="linenos"> 7</span>                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;email&quot;</span><span class="p">,</span>
+<span class="linenos"> 8</span>                <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+<span class="linenos"> 9</span>                <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Filter by email address&quot;</span><span class="p">,</span>
+<span class="linenos">10</span>                <span class="n">examples</span><span class="o">=</span><span class="p">[</span>
+<span class="linenos">11</span>                    <span class="n">OpenApiExample</span><span class="p">(</span>
+<span class="linenos">12</span>                        <span class="s2">&quot;Example 1&quot;</span><span class="p">,</span>
+<span class="linenos">13</span>                        <span class="n">summary</span><span class="o">=</span><span class="s2">&quot;Demo email&quot;</span><span class="p">,</span>
+<span class="linenos">14</span>                        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;get the demo user&quot;</span><span class="p">,</span>
+<span class="linenos">15</span>                        <span class="n">value</span><span class="o">=</span><span class="s2">&quot;demo-email@email.com,&quot;</span><span class="p">,</span>
+<span class="linenos">16</span>                    <span class="p">),</span>
+<span class="linenos">17</span>                <span class="p">],</span>
+<span class="linenos">18</span>            <span class="p">),</span>
+<span class="linenos">19</span>            <span class="n">OpenApiParameter</span><span class="p">(</span>
+<span class="linenos">20</span>                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;username&quot;</span><span class="p">,</span>
+<span class="linenos">21</span>                <span class="nb">type</span><span class="o">=</span><span class="n">OpenApiTypes</span><span class="o">.</span><span class="n">STR</span><span class="p">,</span>
+<span class="linenos">22</span>                <span class="n">location</span><span class="o">=</span><span class="n">OpenApiParameter</span><span class="o">.</span><span class="n">QUERY</span><span class="p">,</span>
+<span class="linenos">23</span>                <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Filter by username&quot;</span><span class="p">,</span>
+<span class="linenos">24</span>                <span class="n">examples</span><span class="o">=</span><span class="p">[</span>
+<span class="linenos">25</span>                    <span class="n">OpenApiExample</span><span class="p">(</span>
+<span class="linenos">26</span>                        <span class="s2">&quot;Example 1&quot;</span><span class="p">,</span>
+<span class="linenos">27</span>                        <span class="n">summary</span><span class="o">=</span><span class="s2">&quot;Demo username&quot;</span><span class="p">,</span>
+<span class="linenos">28</span>                        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;get the demo user&quot;</span><span class="p">,</span>
+<span class="linenos">29</span>                        <span class="n">value</span><span class="o">=</span><span class="s2">&quot;demo-user&quot;</span><span class="p">,</span>
+<span class="linenos">30</span>                    <span class="p">),</span>
+<span class="linenos">31</span>                <span class="p">],</span>
+<span class="linenos">32</span>            <span class="p">),</span>
+<span class="linenos">33</span>        <span class="p">],</span>
+<span class="linenos">34</span>    <span class="p">),</span>
+<span class="linenos">35</span>    <span class="n">create</span><span class="o">=</span><span class="n">extend_schema</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Create a new user&quot;</span><span class="p">),</span>
+<span class="linenos">36</span>    <span class="n">retrieve</span><span class="o">=</span><span class="n">extend_schema</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Return the given user&quot;</span><span class="p">),</span>
+<span class="linenos">37</span>    <span class="n">destroy</span><span class="o">=</span><span class="n">extend_schema</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Delete the given user&quot;</span><span class="p">),</span>
+<span class="linenos">38</span>    <span class="n">update</span><span class="o">=</span><span class="n">extend_schema</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Update the given user&quot;</span><span class="p">),</span>
+<span class="linenos">39</span>    <span class="n">partial_update</span><span class="o">=</span><span class="n">extend_schema</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Partially update the given user&quot;</span><span class="p">),</span>
+<span class="linenos">40</span><span class="p">)</span>
+<span class="linenos">41</span><span class="k">class</span> <span class="nc">UserViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+<span class="linenos">42</span>    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">IsAuthenticated</span><span class="p">]</span>
+<span class="linenos">43</span>    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">UserSerializer</span>
+<span class="linenos">44</span>    <span class="n">lookup_field</span> <span class="o">=</span> <span class="s2">&quot;uuid&quot;</span>
+<span class="linenos">45</span>
+<span class="linenos">46</span>    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">47</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos">48</span><span class="sd">        Optionally filter users by an &#39;email&#39; and/or &#39;username&#39; query paramerter in the URL</span>
+<span class="linenos">49</span><span class="sd">        &quot;&quot;&quot;</span>
+<span class="linenos">50</span>        <span class="n">queryset</span> <span class="o">=</span> <span class="n">get_user_model</span><span class="p">()</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<span class="linenos">51</span>        <span class="n">email</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">query_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;email&quot;</span><span class="p">)</span>
+<span class="linenos">52</span>        <span class="k">if</span> <span class="n">email</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">53</span>            <span class="n">queryset</span> <span class="o">=</span> <span class="n">queryset</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">)</span>
+<span class="linenos">54</span>        <span class="n">username</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">query_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">)</span>
+<span class="linenos">55</span>        <span class="k">if</span> <span class="n">username</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">56</span>            <span class="n">queryset</span> <span class="o">=</span> <span class="n">queryset</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">)</span>
+<span class="linenos">57</span>        <span class="k">return</span> <span class="n">queryset</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple">
+<li><p class="sd-card-text">Write API documentation</p>
+<ol class="arabic simple">
+<li><p class="sd-card-text">Define strings for all 6 actions: <code class="docutils literal notranslate"><span class="pre">create</span></code>, <code class="docutils literal notranslate"><span class="pre">retrieve</span></code>, <code class="docutils literal notranslate"><span class="pre">partial_update</span></code>, <code class="docutils literal notranslate"><span class="pre">update</span></code>, <code class="docutils literal notranslate"><span class="pre">destroy</span></code>, <code class="docutils literal notranslate"><span class="pre">list</span></code>.</p></li>
+<li><p class="sd-card-text">This one is fancy and provides examples of data to pass into the query params. It’s probably more than we need right now.</p>
+<ol class="arabic simple">
+<li><p class="sd-card-text">The examples array can hold multiple examples.</p>
+<ol class="arabic simple">
+<li><p class="sd-card-text">Example ID string has to be unique but is not displayed.</p></li>
+<li><p class="sd-card-text"><code class="docutils literal notranslate"><span class="pre">summary</span></code> string appears as an option in the dropdown.</p></li>
+<li><p class="sd-card-text"><code class="docutils literal notranslate"><span class="pre">description</span></code> is displayed in the example.</p></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p class="sd-card-text">Add query params</p>
+<ol class="arabic simple">
+<li><p class="sd-card-text">Notice the <code class="docutils literal notranslate"><span class="pre">queryset</span></code> property is now the <code class="docutils literal notranslate"><span class="pre">get_queryset(()</span></code> function which returns the queryset.</p></li>
+<li><p class="sd-card-text">The <code class="docutils literal notranslate"><span class="pre">get_queryset()</span></code> function overrides the default and lets us filter the objects returned to the client if they pass in a query param.</p></li>
+<li><p class="sd-card-text">Start with all the model objects and filter them based on any available query params.</p></li>
+</ol>
+</li>
+</ol>
+</div>
+</details></section>
+<section id="register-api-endpoints-to-the-router">
+<h3><span class="sectnum">3.4. </span>Register API endpoints to the router<a class="headerlink" href="#register-api-endpoints-to-the-router" title="Permalink to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>Import the viewset.</p>
+<div class="literal-block-wrapper docutils container" id="id23">
+<div class="code-block-caption"><span class="caption-text">app/core/api/urls.py</span><a class="headerlink" href="#id23" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">.views</span> <span class="kn">import</span> <span class="n">RecurringEventViewSet</span>
+</pre></div>
+</div>
+</div>
+</li>
+<li><p><a class="reference external" href="https://www.django-rest-framework.org/api-guide/routers/#usage">Register</a> the viewset to the <a class="reference external" href="https://www.django-rest-framework.org/api-guide/routers/">router</a></p>
+<div class="literal-block-wrapper docutils container" id="id24">
+<div class="code-block-caption"><span class="caption-text">app/core/api/urls.py</span><a class="headerlink" href="#id24" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">router</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;recurring-events&quot;</span><span class="p">,</span> <span class="n">RecurringEventViewSet</span><span class="p">,</span> <span class="n">basename</span><span class="o">=</span><span class="s2">&quot;recurring-event&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple">
+<li><p>First param is the URL prefix use in the API routes. It is, by convention, plural</p>
+<ul class="simple">
+<li><p>This would show up in the URL like this: <code class="docutils literal notranslate"><span class="pre">http://localhost/api/v1/recuring-events/</span></code> and <code class="docutils literal notranslate"><span class="pre">http://localhost/api/v1/recuring-events/&lt;uuid&gt;</span></code></p></li>
+</ul>
+</li>
+<li><p>Second param is the viewset class which defines the API actions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">basename</span></code> is the name used for generating the endpoint names, such as [basename]-list, [basename]-detail, etc. It’s in the singular form. This is automatically generated if the viewset definition contains a <code class="docutils literal notranslate"><span class="pre">queryset</span></code> attribute, but it’s required if the viewset overrides that with the <code class="docutils literal notranslate"><span class="pre">get_queryset</span></code> function</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">reverse(&quot;recurring-event-list&quot;)</span></code> would return <code class="docutils literal notranslate"><span class="pre">http://localhost/api/v1/recuring-events/</span></code></p></li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</section>
+<section id="add-api-tests">
+<h3><span class="sectnum">3.5. </span>Add API tests<a class="headerlink" href="#add-api-tests" title="Permalink to this heading">#</a></h3>
+<p>For the CRUD operations, since we’re using <code class="docutils literal notranslate"><span class="pre">ModelViewSet</span></code> where all the actions are provided by <code class="docutils literal notranslate"><span class="pre">rest_framework</span></code> and well-tested, it’s not necessary to have test cases for them. But here’s an example of one.</p>
+<ol class="arabic">
+<li><p>Import API URL</p>
+<div class="literal-block-wrapper docutils container" id="id25">
+<div class="code-block-caption"><span class="caption-text">app/core/tests/test_api.py</span><a class="headerlink" href="#id25" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">RECURRING_EVENTS_URL</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s2">&quot;recurring-event-list&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</li>
+<li><p>Add test case</p>
+<div class="literal-block-wrapper docutils container" id="id26">
+<div class="code-block-caption"><span class="caption-text">app/core/tests/test_api.py</span><a class="headerlink" href="#id26" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">test_create_recurring_event</span><span class="p">(</span><span class="n">auth_client</span><span class="p">,</span> <span class="n">project</span><span class="p">):</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Test that we can create a recurring event&quot;&quot;&quot;</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span>    <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos"> 5</span>        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Test Weekly team meeting&quot;</span><span class="p">,</span>
+<span class="linenos"> 6</span>        <span class="s2">&quot;start_time&quot;</span><span class="p">:</span> <span class="s2">&quot;18:00:00&quot;</span><span class="p">,</span>
+<span class="linenos"> 7</span>        <span class="s2">&quot;duration_in_min&quot;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+<span class="linenos"> 8</span>        <span class="s2">&quot;video_conference_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://zoom.com/link&quot;</span><span class="p">,</span>
+<span class="linenos"> 9</span>        <span class="s2">&quot;additional_info&quot;</span><span class="p">:</span> <span class="s2">&quot;Test description&quot;</span><span class="p">,</span>
+<span class="linenos">10</span>        <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span>
+<span class="linenos">11</span>    <span class="p">}</span>
+<span class="linenos">12</span>    <span class="n">res</span> <span class="o">=</span> <span class="n">auth_client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">RECURRING_EVENTS_URL</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+<span class="linenos">13</span>    <span class="k">assert</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">status</span><span class="o">.</span><span class="n">HTTP_201_CREATED</span>
+<span class="linenos">14</span>    <span class="k">assert</span> <span class="n">res</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple">
+<li><p>Given</p>
+<ol class="arabic simple">
+<li><p>Pass in the necessary fixtures</p></li>
+<li><p>Construct the payload</p></li>
+</ol>
+</li>
+<li><p>When</p>
+<ol class="arabic simple">
+<li><p>Create the object</p></li>
+</ol>
+</li>
+<li><p>Then</p>
+<ol class="arabic simple">
+<li><p>Check that it’s created via <a class="reference external" href="https://www.django-rest-framework.org/api-guide/status-codes/#client-error-4xx">status code</a></p></li>
+<li><p>Maybe also check the data. A real test should check all the data, but we’re kind of relying on django to have already tested this.</p></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>Run the test script to show it passing</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./scripts/test.sh
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="check-point-3">
+<h3><span class="sectnum">3.6. </span>Check point 3<a class="headerlink" href="#check-point-3" title="Permalink to this heading">#</a></h3>
+<p>This is a good place to pause, check, and commit progress.</p>
+<ol class="arabic">
+<li><p>Run pre-commit checks</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./scripts/precommit-check.sh
+</pre></div>
+</div>
+</li>
+<li><p>Add and commit changes</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>-A
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;feat: add endpoints: recurring_event&quot;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="push-the-code-and-start-a-pr">
+<h3><span class="sectnum">3.7. </span>Push the code and start a PR<a class="headerlink" href="#push-the-code-and-start-a-pr" title="Permalink to this heading">#</a></h3>
+<p>Refer to the <a class="reference internal" href="../CONTRIBUTING.html#push-to-upstream-origin-aka-your-fork"><span class="std std-doc">contributing doc section on “Push to upstream origin”</span></a> onward.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../tools/sphinx.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Sphinx</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../CONTRIBUTING.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title"><span class="sectnum"> </span>Contributing to People Depot</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Civic Tech Structure
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#"><span class="sectnum"> </span>Add new model and API endpoints</a><ul>
+<li><a class="reference internal" href="#data-model"><span class="sectnum">1. </span>Data model</a><ul>
+<li><a class="reference internal" href="#add-the-model"><span class="sectnum">1.1. </span>Add the model</a></li>
+<li><a class="reference internal" href="#run-migrations"><span class="sectnum">1.2. </span>Run migrations</a></li>
+<li><a class="reference internal" href="#write-a-simple-test"><span class="sectnum">1.3. </span>Write a simple test</a></li>
+<li><a class="reference internal" href="#check-point-1"><span class="sectnum">1.4. </span>Check point 1</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#admin-site"><span class="sectnum">2. </span>Admin site</a><ul>
+<li><a class="reference internal" href="#register-the-model"><span class="sectnum">2.1. </span>Register the model</a></li>
+<li><a class="reference internal" href="#view-the-admin-site"><span class="sectnum">2.2. </span>View the admin site</a></li>
+<li><a class="reference internal" href="#tests"><span class="sectnum">2.3. </span>Tests</a></li>
+<li><a class="reference internal" href="#check-point-2"><span class="sectnum">2.4. </span>Check point 2</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#api"><span class="sectnum">3. </span>API</a><ul>
+<li><a class="reference internal" href="#add-serializer"><span class="sectnum">3.1. </span>Add serializer</a></li>
+<li><a class="reference internal" href="#add-viewset"><span class="sectnum">3.2. </span>Add viewset</a></li>
+<li><a class="reference internal" href="#extended-example"><span class="sectnum">3.3. </span>Extended example</a></li>
+<li><a class="reference internal" href="#register-api-endpoints-to-the-router"><span class="sectnum">3.4. </span>Register API endpoints to the router</a></li>
+<li><a class="reference internal" href="#add-api-tests"><span class="sectnum">3.5. </span>Add API tests</a></li>
+<li><a class="reference internal" href="#check-point-3"><span class="sectnum">3.6. </span>Check point 3</a></li>
+<li><a class="reference internal" href="#push-the-code-and-start-a-pr"><span class="sectnum">3.7. </span>Push the code and start a PR</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/design-tabs.js"></script>
+    </body>
+</html>
