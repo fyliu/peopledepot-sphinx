@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Ssh" href="ssh.html" /><link rel="prev" title="Convenience Scripts" href="scripts.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Pytest" href="pytest.html" /><link rel="prev" title="Docker" href="docker.html" />
 
     <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
-        <title>Sphinx - People Depot</title>
+        <title>Git - People Depot</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
@@ -181,11 +181,11 @@
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Tools</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="docker.html">Docker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="git.html">Git</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Git</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pytest.html">Pytest</a></li>
 <li class="toctree-l2"><a class="reference internal" href="python.html">Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scripts.html">Convenience Scripts</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ssh.html">Ssh</a></li>
 </ul>
 </li>
@@ -209,7 +209,7 @@
         </a>
         <div class="content-icon-container">
           <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/hackforla/peopledepot/edit/main/docs/tools/sphinx.rst" title="Edit this page">
+  <a class="muted-link" href="https://github.com/hackforla/peopledepot/edit/main/docs/tools/git.md" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
@@ -231,60 +231,125 @@
           </label>
         </div>
         <article role="main">
-          <section id="sphinx">
-<h1>Sphinx<a class="headerlink" href="#sphinx" title="Permalink to this heading">#</a></h1>
+          <section id="git">
+<h1>Git<a class="headerlink" href="#git" title="Permalink to this heading">#</a></h1>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
-<p>Sphinx is a popular documentation generator for software projects, especially python projects.</p>
+<p>Git is a distributed revision control system. In other words, it keeps a history of your code changes that you can share with other people.</p>
 </section>
-<section id="features">
-<h2>Features<a class="headerlink" href="#features" title="Permalink to this heading">#</a></h2>
-<dl class="simple">
-<dt>Documentation versioning</dt><dd><p>This will be useful when we have different stable and dev versions.</p>
-</dd>
-<dt>Easy to read</dt><dd><p>It supports many themes, of which we’re using the popular furo, which has a clean look and a dark mode.</p>
-</dd>
-<dt>Useful extensions</dt><dd><p>There’s a number of useful extensions that makes documentation easier to read.</p>
-</dd>
-</dl>
-<p>See ADR for why we chose sphinx</p>
+<section id="basics">
+<h2>Basics<a class="headerlink" href="#basics" title="Permalink to this heading">#</a></h2>
+<section id="clone">
+<h3>Clone<a class="headerlink" href="#clone" title="Permalink to this heading">#</a></h3>
 </section>
-<section id="how-we-use-it">
-<h2>How we use it<a class="headerlink" href="#how-we-use-it" title="Permalink to this heading">#</a></h2>
-<section id="local-editing">
-<h3>Local editing<a class="headerlink" href="#local-editing" title="Permalink to this heading">#</a></h3>
-<ol class="arabic">
-<li><p>Install the Tools</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>docs
-poetry<span class="w"> </span>install
-poetry<span class="w"> </span>shell
+<section id="stage">
+<h3>Stage<a class="headerlink" href="#stage" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="commit">
+<h3>Commit<a class="headerlink" href="#commit" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="push">
+<h3>Push<a class="headerlink" href="#push" title="Permalink to this heading">#</a></h3>
+</section>
+</section>
+<section id="branching-models">
+<h2>Branching models<a class="headerlink" href="#branching-models" title="Permalink to this heading">#</a></h2>
+<section id="work-in-the-same-repo">
+<h3>Work in the same repo<a class="headerlink" href="#work-in-the-same-repo" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="work-in-forks">
+<h3>Work in forks<a class="headerlink" href="#work-in-forks" title="Permalink to this heading">#</a></h3>
+</section>
+</section>
+<section id="topics">
+<h2>Topics<a class="headerlink" href="#topics" title="Permalink to this heading">#</a></h2>
+<section id="remotes">
+<h3>Remotes<a class="headerlink" href="#remotes" title="Permalink to this heading">#</a></h3>
+<section id="setting-up-remotes">
+<h4>Setting up remotes<a class="headerlink" href="#setting-up-remotes" title="Permalink to this heading">#</a></h4>
+</section>
+<section id="tracking-branches">
+<h4>Tracking branches<a class="headerlink" href="#tracking-branches" title="Permalink to this heading">#</a></h4>
+</section>
+</section>
+<section id="small-fixes">
+<h3>Small fixes<a class="headerlink" href="#small-fixes" title="Permalink to this heading">#</a></h3>
+<section id="amend">
+<h4>Amend<a class="headerlink" href="#amend" title="Permalink to this heading">#</a></h4>
+</section>
+<section id="fixup-autosquash">
+<h4>Fixup/autosquash<a class="headerlink" href="#fixup-autosquash" title="Permalink to this heading">#</a></h4>
+<p>Display recent history</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git log --oneline
 </pre></div>
 </div>
-</li>
-<li><p>Run autobuild inside poetry shell</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>livehtml
+<p>count down to find the commit to fix
+let’s say it’s the 4th item, that’s HEAD~3, where HEAD is the first item.</p>
+<p>Commit the current staged changes with the fixup! flag to merge with the target commit.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git commit --fixup=HEAD~3
+# or
+git commit --fixup :/&lt;unique portion of shortlog msg&gt;
 </pre></div>
 </div>
-</li>
-<li><p>Open <code class="docutils literal notranslate"><span class="pre">http://localhost:8000/</span></code> to see the generated site</p></li>
-<li><p>The page will auto-update when you save changes. If not, <code class="docutils literal notranslate"><span class="pre">Ctrl-C</span></code> the <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">livehtml</span></code> command and re-run it.</p></li>
-</ol>
+<p>You’ll see the commit shortlog is the same as that of the target commit.</p>
+<p>Stash any unsaved changes.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git stash
+</pre></div>
+</div>
+<p>Perform an interactive rebase with autosquash. Since it’s the 4th item, and we just added another commit, we need to use HEAD~5 to reach the target commit.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git -c sequence.editor=: rebase -i HEAD~5 --autosquash
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">sequence.editor=:</span></code> passes a configuration option to git to disable the editor.</p>
+<section id="references">
+<h5>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h5>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>https://thoughtbot.com/blog/autosquashing-git-commits
+</pre></div>
+</div>
 </section>
-<section id="auto-generate-documentation">
-<h3>Auto generate documentation<a class="headerlink" href="#auto-generate-documentation" title="Permalink to this heading">#</a></h3>
-<p>When changes are pushed onto github, it triggers a workflow to build and upload the resulting html documentation as github pages.</p>
+</section>
+<section id="squashing-commits">
+<h4>Squashing commits<a class="headerlink" href="#squashing-commits" title="Permalink to this heading">#</a></h4>
+</section>
+</section>
+<section id="merging-models">
+<h3>Merging models<a class="headerlink" href="#merging-models" title="Permalink to this heading">#</a></h3>
+<section id="merge">
+<h4>Merge<a class="headerlink" href="#merge" title="Permalink to this heading">#</a></h4>
+</section>
+<section id="rebase">
+<h4>Rebase<a class="headerlink" href="#rebase" title="Permalink to this heading">#</a></h4>
+</section>
+<section id="squash">
+<h4>Squash<a class="headerlink" href="#squash" title="Permalink to this heading">#</a></h4>
+</section>
+<section id="github-merge-annoyances">
+<h4>Github merge annoyances<a class="headerlink" href="#github-merge-annoyances" title="Permalink to this heading">#</a></h4>
+</section>
+</section>
+<section id="aliases">
+<h3>Aliases<a class="headerlink" href="#aliases" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="delete-files-from-the-remote">
+<h3>Delete files from the remote<a class="headerlink" href="#delete-files-from-the-remote" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="ignore-files">
+<h3>Ignore files<a class="headerlink" href="#ignore-files" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>github actions</p></li>
+<li><p>http://gitignore.io</p></li>
+</ul>
+</section>
+<section id="conflicts">
+<h3>Conflicts<a class="headerlink" href="#conflicts" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Note: DO NOT commit new code inside conflict resolution commits</p></li>
 </ul>
 </section>
 </section>
-<section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<section id="git-references">
+<h2>Git References<a class="headerlink" href="#git-references" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p><a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html">Sphinx reST syntax</a></p></li>
-<li><p><a class="reference external" href="https://myst-parser.readthedocs.io/en/latest/syntax/syntax.html">MyST md syntax</a></p></li>
-<li><p><a class="reference external" href="https://pradyunsg.me/furo/">Furo</a></p></li>
-<li><p><a class="reference external" href="https://sphinx-design.readthedocs.io/en/furo-theme/">Sphinx-design</a></p></li>
+<li><p>http://www-cs-students.stanford.edu/~blynn/gitmagic/</p></li>
 </ul>
 </section>
 </section>
@@ -294,23 +359,23 @@ poetry<span class="w"> </span>shell
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="ssh.html">
+          <a class="next-page" href="pytest.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Ssh</div>
+                <div class="title">Pytest</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="scripts.html">
+          <a class="prev-page" href="docker.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Convenience Scripts</div>
+                <div class="title">Docker</div>
                 
               </div>
             </a>
@@ -344,15 +409,49 @@ poetry<span class="w"> </span>shell
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Sphinx</a><ul>
+<li><a class="reference internal" href="#">Git</a><ul>
 <li><a class="reference internal" href="#overview">Overview</a></li>
-<li><a class="reference internal" href="#features">Features</a></li>
-<li><a class="reference internal" href="#how-we-use-it">How we use it</a><ul>
-<li><a class="reference internal" href="#local-editing">Local editing</a></li>
-<li><a class="reference internal" href="#auto-generate-documentation">Auto generate documentation</a></li>
+<li><a class="reference internal" href="#basics">Basics</a><ul>
+<li><a class="reference internal" href="#clone">Clone</a></li>
+<li><a class="reference internal" href="#stage">Stage</a></li>
+<li><a class="reference internal" href="#commit">Commit</a></li>
+<li><a class="reference internal" href="#push">Push</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#branching-models">Branching models</a><ul>
+<li><a class="reference internal" href="#work-in-the-same-repo">Work in the same repo</a></li>
+<li><a class="reference internal" href="#work-in-forks">Work in forks</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#topics">Topics</a><ul>
+<li><a class="reference internal" href="#remotes">Remotes</a><ul>
+<li><a class="reference internal" href="#setting-up-remotes">Setting up remotes</a></li>
+<li><a class="reference internal" href="#tracking-branches">Tracking branches</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#small-fixes">Small fixes</a><ul>
+<li><a class="reference internal" href="#amend">Amend</a></li>
+<li><a class="reference internal" href="#fixup-autosquash">Fixup/autosquash</a><ul>
 <li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#squashing-commits">Squashing commits</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#merging-models">Merging models</a><ul>
+<li><a class="reference internal" href="#merge">Merge</a></li>
+<li><a class="reference internal" href="#rebase">Rebase</a></li>
+<li><a class="reference internal" href="#squash">Squash</a></li>
+<li><a class="reference internal" href="#github-merge-annoyances">Github merge annoyances</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#aliases">Aliases</a></li>
+<li><a class="reference internal" href="#delete-files-from-the-remote">Delete files from the remote</a></li>
+<li><a class="reference internal" href="#ignore-files">Ignore files</a></li>
+<li><a class="reference internal" href="#conflicts">Conflicts</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#git-references">Git References</a></li>
 </ul>
 </li>
 </ul>

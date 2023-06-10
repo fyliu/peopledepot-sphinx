@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Ssh" href="ssh.html" /><link rel="prev" title="Convenience Scripts" href="scripts.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Git" href="git.html" /><link rel="prev" title="Tools" href="index.html" />
 
     <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
-        <title>Sphinx - People Depot</title>
+        <title>Docker - People Depot</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
@@ -136,7 +136,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -180,12 +180,12 @@
 </ul>
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Tools</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="docker.html">Docker</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Docker</a></li>
 <li class="toctree-l2"><a class="reference internal" href="git.html">Git</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pytest.html">Pytest</a></li>
 <li class="toctree-l2"><a class="reference internal" href="python.html">Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scripts.html">Convenience Scripts</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sphinx.html">Sphinx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ssh.html">Ssh</a></li>
 </ul>
 </li>
@@ -209,7 +209,7 @@
         </a>
         <div class="content-icon-container">
           <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/hackforla/peopledepot/edit/main/docs/tools/sphinx.rst" title="Edit this page">
+  <a class="muted-link" href="https://github.com/hackforla/peopledepot/edit/main/docs/tools/docker.md" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
@@ -225,68 +225,14 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="sphinx">
-<h1>Sphinx<a class="headerlink" href="#sphinx" title="Permalink to this heading">#</a></h1>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
-<p>Sphinx is a popular documentation generator for software projects, especially python projects.</p>
-</section>
-<section id="features">
-<h2>Features<a class="headerlink" href="#features" title="Permalink to this heading">#</a></h2>
-<dl class="simple">
-<dt>Documentation versioning</dt><dd><p>This will be useful when we have different stable and dev versions.</p>
-</dd>
-<dt>Easy to read</dt><dd><p>It supports many themes, of which we’re using the popular furo, which has a clean look and a dark mode.</p>
-</dd>
-<dt>Useful extensions</dt><dd><p>There’s a number of useful extensions that makes documentation easier to read.</p>
-</dd>
-</dl>
-<p>See ADR for why we chose sphinx</p>
-</section>
-<section id="how-we-use-it">
-<h2>How we use it<a class="headerlink" href="#how-we-use-it" title="Permalink to this heading">#</a></h2>
-<section id="local-editing">
-<h3>Local editing<a class="headerlink" href="#local-editing" title="Permalink to this heading">#</a></h3>
-<ol class="arabic">
-<li><p>Install the Tools</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>docs
-poetry<span class="w"> </span>install
-poetry<span class="w"> </span>shell
-</pre></div>
-</div>
-</li>
-<li><p>Run autobuild inside poetry shell</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>livehtml
-</pre></div>
-</div>
-</li>
-<li><p>Open <code class="docutils literal notranslate"><span class="pre">http://localhost:8000/</span></code> to see the generated site</p></li>
-<li><p>The page will auto-update when you save changes. If not, <code class="docutils literal notranslate"><span class="pre">Ctrl-C</span></code> the <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">livehtml</span></code> command and re-run it.</p></li>
-</ol>
-</section>
-<section id="auto-generate-documentation">
-<h3>Auto generate documentation<a class="headerlink" href="#auto-generate-documentation" title="Permalink to this heading">#</a></h3>
-<p>When changes are pushed onto github, it triggers a workflow to build and upload the resulting html documentation as github pages.</p>
-<ul class="simple">
-<li><p>github actions</p></li>
-</ul>
-</section>
-</section>
-<section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html">Sphinx reST syntax</a></p></li>
-<li><p><a class="reference external" href="https://myst-parser.readthedocs.io/en/latest/syntax/syntax.html">MyST md syntax</a></p></li>
-<li><p><a class="reference external" href="https://pradyunsg.me/furo/">Furo</a></p></li>
-<li><p><a class="reference external" href="https://sphinx-design.readthedocs.io/en/furo-theme/">Sphinx-design</a></p></li>
-</ul>
-</section>
+          <section id="docker">
+<h1>Docker<a class="headerlink" href="#docker" title="Permalink to this heading">#</a></h1>
 </section>
 
         </article>
@@ -294,23 +240,23 @@ poetry<span class="w"> </span>shell
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="ssh.html">
+          <a class="next-page" href="git.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Ssh</div>
+                <div class="title">Git</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="scripts.html">
+          <a class="prev-page" href="index.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Convenience Scripts</div>
+                <div class="title">Tools</div>
                 
               </div>
             </a>
@@ -332,34 +278,8 @@ poetry<span class="w"> </span>shell
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">Sphinx</a><ul>
-<li><a class="reference internal" href="#overview">Overview</a></li>
-<li><a class="reference internal" href="#features">Features</a></li>
-<li><a class="reference internal" href="#how-we-use-it">How we use it</a><ul>
-<li><a class="reference internal" href="#local-editing">Local editing</a></li>
-<li><a class="reference internal" href="#auto-generate-documentation">Auto generate documentation</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#references">References</a></li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>
